@@ -1,0 +1,2336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descobreix Barcelona | Walking Tours, Rutas Privadas & Servicios Culturales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap');
+
+        :root {
+            /* Paleta Auténtica Catalana & Gaudí */
+            --limestone-bg: #FAF6EF;
+            --limestone-warm: #F1E8D9;
+            --senyera-gold: #D99B26;
+            --senyera-gold-dark: #B37D14;
+            --sang-crimson: #8A2222;
+            --med-cobalt: #11324D;
+            --med-cobalt-light: #1D4E75;
+            --montserrat-green: #36533D;
+            --forged-iron: #1C1E1D;
+            --iron-muted: #4A504B;
+            --pure-white: #FFFFFF;
+            
+            /* Tipografía y Escalas */
+            --font-scale: 1;
+            --font-serif: 'Cormorant Garamond', 'Noto Serif SC', 'Noto Serif TC', Georgia, serif;
+            --font-display: 'Cinzel Decorative', 'Cormorant Garamond', 'Noto Serif SC', 'Noto Serif TC', serif;
+            --font-sans: 'Montserrat', -apple-system, sans-serif;
+            --transition-smooth: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* Tipografía adaptada para Chino */
+        body[lang="zh-CN"] {
+            --font-serif: 'Noto Serif SC', 'Cormorant Garamond', serif;
+            --font-display: 'Noto Serif SC', 'Cinzel Decorative', serif;
+        }
+
+        body[lang="zh-TW"] {
+            --font-serif: 'Noto Serif TC', 'Cormorant Garamond', serif;
+            --font-display: 'Noto Serif TC', 'Cinzel Decorative', serif;
+        }
+
+        /* Accesibilidad: Alto Contraste */
+        body.high-contrast {
+            --limestone-bg: #000000;
+            --limestone-warm: #181818;
+            --senyera-gold: #FFE600;
+            --senyera-gold-dark: #FFCC00;
+            --sang-crimson: #FF5555;
+            --med-cobalt: #70C5FF;
+            --med-cobalt-light: #A3D8FF;
+            --montserrat-green: #68D391;
+            --forged-iron: #FFFFFF;
+            --iron-muted: #E2E8F0;
+            --pure-white: #111111;
+            background-color: #000000 !important;
+            color: #FFFFFF !important;
+        }
+
+        /* Accesibilidad: Fuente Dislexia */
+        body.dyslexia-font {
+            --font-serif: 'Montserrat', Arial, sans-serif !important;
+            --font-display: 'Montserrat', Arial, sans-serif !important;
+        }
+
+        /* Accesibilidad: Reducción de Movimiento */
+        body.reduced-motion * {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: calc(18px * var(--font-scale));
+            background-color: var(--limestone-bg);
+            color: var(--forged-iron);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(217, 155, 38, 0.06) 1px, transparent 1px),
+                radial-gradient(circle at 100% 0%, rgba(17, 50, 77, 0.03) 24px, transparent 25px);
+            background-size: 28px 28px, 56px 56px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* 1. Cinta Superior con los Colores de la Bandera Catalana (La Senyera) */
+        .senyera-bar {
+            height: 12px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--senyera-gold) 0px,
+                var(--senyera-gold) 20px,
+                var(--sang-crimson) 20px,
+                var(--sang-crimson) 40px
+            );
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Barra de Navegación */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5vw;
+            background: rgba(250, 246, 239, 0.94);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(217, 155, 38, 0.3);
+            box-shadow: 0 4px 20px rgba(17, 50, 77, 0.05);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-crest {
+            font-size: 1.8rem;
+            filter: drop-shadow(0 2px 4px rgba(217,155,38,0.4));
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--med-cobalt);
+            letter-spacing: 1.5px;
+            display: block;
+        }
+
+        .brand-tagline {
+            font-family: var(--font-sans);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--sang-crimson);
+            text-transform: uppercase;
+            font-weight: 700;
+            display: block;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-center a {
+            text-decoration: none;
+            color: var(--forged-iron);
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            transition: color var(--transition-smooth);
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-center a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--sang-crimson);
+            transition: all var(--transition-smooth);
+            transform: translateX(-50%);
+        }
+
+        .nav-center a:hover {
+            color: var(--sang-crimson);
+        }
+
+        .nav-center a:hover::after {
+            width: 100%;
+        }
+
+        /* Controles de Utilidad */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            background: var(--limestone-warm);
+            padding: 3px;
+            border-radius: 30px;
+            border: 1px solid rgba(217, 155, 38, 0.4);
+            flex-wrap: nowrap;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--iron-muted);
+            padding: 5px 8px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .lang-btn.active {
+            background: var(--med-cobalt);
+            color: #FFFFFF;
+            box-shadow: 0 2px 6px rgba(17, 50, 77, 0.3);
+        }
+
+        .icon-btn {
+            background: var(--limestone-warm);
+            border: 1px solid rgba(217, 155, 38, 0.4);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--forged-iron);
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-2px);
+            background: var(--senyera-gold);
+            color: #FFFFFF;
+        }
+
+        /* 1. SECCIÓN: INICIO (Hero / Propuesta de Valor y Bienvenida) */
+        .hero {
+            position: relative;
+            min-height: 86vh;
+            background: linear-gradient(rgba(17, 50, 77, 0.84), rgba(28, 30, 29, 0.88)), 
+                        url('https://images.unsplash.com/photo-1583422409516-2895a77ef244?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 70px 24px;
+        }
+
+        .hero-badge {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: rgba(217, 155, 38, 0.25);
+            border: 1px solid var(--senyera-gold);
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 24px;
+            color: #FFF2CC;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.3rem, 5.5vw, 4.6rem);
+            line-height: 1.18;
+            margin-bottom: 22px;
+            max-width: 980px;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.6);
+        }
+
+        .hero h1 span {
+            color: var(--senyera-gold);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.35rem;
+            max-width: 840px;
+            line-height: 1.65;
+            margin-bottom: 35px;
+            color: #E2E8F0;
+            font-style: italic;
+        }
+
+        .hero-pillars {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+            max-width: 1000px;
+        }
+
+        .pillar-chip {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(217, 155, 38, 0.45);
+            border-radius: 20px;
+            padding: 8px 18px;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            color: #FFFDF9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-catalan {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--senyera-gold) 0%, var(--senyera-gold-dark) 100%);
+            color: #1A1A1A;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(217, 155, 38, 0.35);
+            transition: all var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+        }
+
+        .btn-catalan:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 32px rgba(217, 155, 38, 0.5);
+            background: linear-gradient(135deg, #F4B846 0%, var(--senyera-gold) 100%);
+        }
+
+        /* 2. SECCIÓN: SOBRE MÍ (Historia Personal, UPF, Trayectoria e Identidad) */
+        .storyteller-section {
+            padding: 90px 6vw;
+            max-width: 1260px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .storyteller-frame {
+            position: relative;
+            padding: 14px;
+        }
+
+        .storyteller-img {
+            width: 100%;
+            height: 560px;
+            object-fit: cover;
+            border-radius: 120px 20px 120px 20px;
+            box-shadow: 0 20px 40px rgba(17, 50, 77, 0.15);
+            border: 2px solid var(--senyera-gold);
+            filter: sepia(18%) contrast(1.05);
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
+
+        .storyteller-img:hover {
+            filter: sepia(0%) contrast(1.02);
+        }
+
+        .storyteller-stamp {
+            position: absolute;
+            bottom: -15px;
+            right: -10px;
+            background: var(--sang-crimson);
+            color: #FFFFFF;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 6px 16px rgba(138, 34, 34, 0.3);
+        }
+
+        .chapter-num {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--sang-crimson);
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .storyteller-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.85rem, 3.1vw, 2.6rem);
+            color: var(--med-cobalt);
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+
+        .storyteller-content p {
+            font-size: 1.15rem;
+            line-height: 1.75;
+            color: var(--iron-muted);
+            margin-bottom: 16px;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .timeline-card {
+            background: var(--limestone-warm);
+            padding: 20px;
+            border-radius: 18px;
+            border-left: 4px solid var(--senyera-gold);
+        }
+
+        .timeline-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            color: var(--med-cobalt);
+            margin-bottom: 6px;
+        }
+
+        .timeline-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--forged-iron);
+            margin-bottom: 0;
+        }
+
+        /* Banner de Filosofía de Turismo Sostenible */
+        .quote-banner {
+            background: var(--limestone-warm);
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(217, 155, 38, 0.25);
+            border-bottom: 1px solid rgba(217, 155, 38, 0.25);
+        }
+
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: clamp(1.3rem, 2.3vw, 1.9rem);
+            font-style: italic;
+            max-width: 900px;
+            margin: 0 auto 12px auto;
+            color: var(--med-cobalt);
+            line-height: 1.45;
+        }
+
+        .quote-author {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--sang-crimson);
+            text-transform: uppercase;
+        }
+
+        /* 3. SECCIÓN: SERVICIOS Y EXPERIENCIAS */
+        .services-section {
+            padding: 90px 5vw;
+            text-align: center;
+        }
+
+        .section-header {
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+            color: var(--med-cobalt);
+            margin-bottom: 14px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--iron-muted);
+            line-height: 1.6;
+        }
+
+        .pricing-note {
+            display: inline-block;
+            background: rgba(217, 155, 38, 0.15);
+            border: 1px dashed var(--senyera-gold-dark);
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--med-cobalt);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .tour-card {
+            background: var(--pure-white);
+            border-radius: 35px 35px 25px 25px;
+            box-shadow: 0 16px 40px rgba(17, 50, 77, 0.08);
+            border: 1px solid rgba(217, 155, 38, 0.25);
+            overflow: hidden;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 24px 50px rgba(17, 50, 77, 0.16);
+            border-color: var(--senyera-gold);
+        }
+
+        .card-media {
+            position: relative;
+            padding: 15px 15px 0 15px;
+        }
+
+        .card-img {
+            height: 230px;
+            background-position: center;
+            background-size: cover;
+            border-radius: 100px 100px 15px 15px;
+            filter: sepia(30%) grayscale(50%) contrast(1.1);
+            transition: filter 0.8s ease, transform 0.8s ease;
+        }
+
+        .tour-card:hover .card-img {
+            filter: sepia(0%) grayscale(0%) contrast(1.05);
+            transform: scale(1.02);
+        }
+
+        .img-serv1 { background-image: url('https://res.cloudinary.com/o7imke3b/image/upload/v1788043071/WhatsApp_Image_2026-08-30_at_00.35.35.jpg'); }
+        .img-serv2 { background-image: url('https://res.cloudinary.com/o7imke3b/image/upload/v1788043079/WhatsApp_Image_2026-08-30_at_00.36.15.jpg'); }
+        .img-serv3 { background-image: url('https://res.cloudinary.com/o7imke3b/image/upload/v1788043489/WhatsApp_Image_2026-08-30_at_00.19.57_2.jpg'); }
+
+        .card-price-tag {
+            position: absolute;
+            bottom: 10px;
+            right: 25px;
+            background: var(--sang-crimson);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(138, 34, 34, 0.35);
+        }
+
+        .card-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .card-body h3 {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            color: var(--sang-crimson);
+            margin-bottom: 12px;
+        }
+
+        .card-body p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--iron-muted);
+            margin-bottom: 20px;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .card-features li {
+            margin-bottom: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--med-cobalt);
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(217, 155, 38, 0.15);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .card-action {
+            display: block;
+            text-align: center;
+            padding: 12px 20px;
+            border: 1.5px solid var(--med-cobalt);
+            color: var(--med-cobalt);
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .card-action:hover {
+            background: var(--med-cobalt);
+            color: #FFFFFF;
+            box-shadow: 0 6px 16px rgba(17, 50, 77, 0.25);
+        }
+
+        /* 4. SECCIÓN: POLÍTICA DE RESERVAS Y CANCELACIONES */
+        .policy-section {
+            background: var(--limestone-warm);
+            padding: 80px 6vw;
+            border-top: 1px solid rgba(217, 155, 38, 0.25);
+            border-bottom: 1px solid rgba(217, 155, 38, 0.25);
+        }
+
+        .policy-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            margin-top: 35px;
+        }
+
+        .policy-card {
+            background: var(--pure-white);
+            padding: 30px;
+            border-radius: 22px;
+            border: 1px solid rgba(217, 155, 38, 0.25);
+            box-shadow: 0 8px 24px rgba(17, 50, 77, 0.04);
+        }
+
+        .policy-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--sang-crimson);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .policy-card p {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--iron-muted);
+        }
+
+        /* 5. SECCIÓN: FORMULARIO DE CONTACTO E INFORMACIÓN DIRECTA */
+        .contact-section {
+            padding: 90px 6vw;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .contact-form-card {
+            background: var(--pure-white);
+            padding: 40px;
+            border-radius: 28px;
+            border: 1px solid rgba(217, 155, 38, 0.3);
+            box-shadow: 0 16px 40px rgba(17, 50, 77, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--med-cobalt);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(217, 155, 38, 0.4);
+            border-radius: 14px;
+            background: var(--limestone-bg);
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--forged-iron);
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--sang-crimson);
+            box-shadow: 0 0 0 3px rgba(138, 34, 34, 0.15);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .info-card {
+            background: var(--limestone-warm);
+            padding: 20px 22px;
+            border-radius: 18px;
+            border-left: 4px solid var(--sang-crimson);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .info-card-icon {
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.7);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+        }
+
+        .info-card-content h5 {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--sang-crimson);
+            margin-bottom: 3px;
+        }
+
+        .info-card-content p {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--med-cobalt);
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        /* FOOTER & HUEVO DE PASCUA CULTURAL */
+        footer {
+            background: var(--forged-iron);
+            color: var(--limestone-bg);
+            padding: 70px 24px 40px 24px;
+            text-align: center;
+            position: relative;
+            border-top: 4px solid var(--senyera-gold);
+        }
+
+        .panot-trigger-wrap {
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        .panot-btn {
+            background: transparent;
+            border: none;
+            font-size: 3.5rem;
+            cursor: pointer;
+            filter: drop-shadow(0 0 15px rgba(217, 155, 38, 0.3));
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            user-select: none;
+            display: inline-block;
+        }
+
+        .panot-btn:hover {
+            transform: rotate(90deg) scale(1.18);
+            filter: drop-shadow(0 0 25px rgba(217, 155, 38, 0.8));
+        }
+
+        .panot-hint {
+            font-size: 1.1rem;
+            color: #A0ABA4;
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+
+        .footer-legal {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: #7A8580;
+            border-top: 1px solid #2D3330;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-legal a {
+            color: var(--senyera-gold);
+            text-decoration: none;
+        }
+
+        /* MODALES */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(17, 50, 77, 0.65);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--limestone-bg);
+            border-radius: 28px;
+            border: 2px solid var(--senyera-gold);
+            padding: 35px;
+            max-width: 540px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            animation: modalPop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .modal-box.large {
+            max-width: 820px;
+        }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            color: var(--med-cobalt);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--iron-muted);
+            cursor: pointer;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(217, 155, 38, 0.2);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+        }
+
+        .btn-toggle-group {
+            display: flex;
+            gap: 6px;
+        }
+
+        .toggle-chip {
+            background: var(--limestone-warm);
+            border: 1px solid rgba(217, 155, 38, 0.4);
+            border-radius: 16px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-chip.active {
+            background: var(--sang-crimson);
+            color: #FFFFFF;
+            border-color: var(--sang-crimson);
+        }
+
+        /* TEXTO LEGAL Y POLÍTICAS (AVISO LEGAL, POLÍTICA DE PRIVACIDAD Y LOPDGDD) */
+        .legal-document {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--iron-muted);
+            text-align: left;
+        }
+
+        .legal-document h4 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            color: var(--sang-crimson);
+            margin-top: 22px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(217, 155, 38, 0.3);
+            padding-bottom: 4px;
+        }
+
+        .legal-document h5 {
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--med-cobalt);
+            margin-top: 14px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .legal-document p {
+            margin-bottom: 12px;
+        }
+
+        .legal-document ul {
+            padding-left: 22px;
+            margin-bottom: 14px;
+        }
+
+        .legal-document ul li {
+            margin-bottom: 6px;
+        }
+
+        /* BANNER DE COOKIES */
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: 950px;
+            background: rgba(250, 246, 239, 0.98);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--senyera-gold);
+            border-radius: 24px;
+            padding: 22px 28px;
+            box-shadow: 0 15px 40px rgba(17, 50, 77, 0.25);
+            z-index: 900;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-banner.hidden {
+            display: none;
+        }
+
+        .cookie-text {
+            flex: 1 1 380px;
+        }
+
+        .cookie-text h4 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            color: var(--med-cobalt);
+            margin-bottom: 6px;
+        }
+
+        .cookie-text p {
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--iron-muted);
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn-cookie-primary {
+            background: var(--senyera-gold);
+            color: #1A1A1A;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-cookie-primary:hover {
+            background: var(--senyera-gold-dark);
+            color: #FFFFFF;
+        }
+
+        .btn-cookie-secondary {
+            background: transparent;
+            color: var(--med-cobalt);
+            border: 1px solid var(--med-cobalt);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-cookie-link {
+            background: transparent;
+            color: var(--sang-crimson);
+            border: 1px dashed var(--sang-crimson);
+            padding: 9px 15px;
+            border-radius: 20px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-cookie-link:hover {
+            background: var(--sang-crimson);
+            color: #FFFFFF;
+        }
+
+        /* Partículas del Huevo de Pascua */
+        .falling-artifact {
+            position: fixed;
+            top: -60px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: fallRotate linear forwards;
+        }
+
+        @keyframes fallRotate {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            80% { opacity: 0.9; }
+            100% { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+        }
+
+        /* Adaptación Móvil */
+        @media (max-width: 900px) {
+            .storyteller-section, .contact-layout {
+                grid-template-columns: 1fr;
+            }
+            .storyteller-img {
+                height: 380px;
+            }
+            .timeline-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-center {
+                display: none;
+            }
+            .cookie-banner {
+                bottom: 10px;
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body lang="es">
+
+    <!-- 1. Cinta Superior con los Colores de la Senyera (Bandera de Catalunya) -->
+    <div class="senyera-bar"></div>
+
+    <!-- Navegación Principal -->
+    <nav>
+        <a href="#" class="nav-brand">
+            <span class="brand-crest">🦎</span>
+            <div>
+                <span class="brand-title">Descobreix BCN</span>
+                <span class="brand-tagline" data-i18n="tagline">Tours & Experiencias Culturales</span>
+            </div>
+        </a>
+
+        <div class="nav-center">
+            <a href="#inicio" data-i18n="nav_home">Inicio</a>
+            <a href="#sobre-mi" data-i18n="nav_about">Mi Historia</a>
+            <a href="#servicios" data-i18n="nav_services">Experiencias</a>
+            <a href="#politicas" data-i18n="nav_policies">Reservas & Cancelación</a>
+            <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+        </div>
+
+        <div class="nav-controls">
+            <!-- Selector de Idiomas (ES, CA, EN, ZH-S, ZH-T) -->
+            <div class="lang-switch" role="group" aria-label="Selección de idioma">
+                <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
+                <button class="lang-btn" onclick="setLanguage('ca')">CA</button>
+                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="setLanguage('zh-hans')">简体</button>
+                <button class="lang-btn" onclick="setLanguage('zh-hant')">繁體</button>
+            </div>
+
+            <!-- Botón de Accesibilidad -->
+            <button class="icon-btn" onclick="toggleModal('accessModal')" title="Opciones de Accesibilidad" aria-label="Ajustes de accesibilidad">
+                ♿
+            </button>
+        </div>
+    </nav>
+
+    <!-- 1. PÁGINA DE INICIO (Hero / Propuesta de Valor y Bienvenida) -->
+    <header class="hero" id="inicio">
+        <span class="hero-badge" data-i18n="hero_badge">Walking Tours · Rutas Privadas · Servicios Culturales</span>
+        <h1 data-i18n="hero_title">Descubre Barcelona <span>Con Otros Ojos</span></h1>
+        <p data-i18n="hero_subtitle">Con su historia de más de dos mil años, las calles, plazas y edificios de Barcelona esconden secretos. Te invito a descubrirlos conmigo, más allá de los lugares de siempre, desde una mirada cercana, multilingüe e intercultural.</p>
+        
+        <div class="hero-pillars">
+            <div class="pillar-chip"><span>🇬🇧 ➡️ 🇪🇸</span> <span data-i18n="pillar_1">De Londres a Barcelona</span></div>
+            <div class="pillar-chip"><span>🎓</span> <span data-i18n="pillar_2">Graduada UPF en Traducción</span></div>
+            <div class="pillar-chip"><span>🌱</span> <span data-i18n="pillar_3">Turismo Consciente & Sostenible</span></div>
+            <div class="pillar-chip"><span>🌐</span> <span data-i18n="pillar_4">Chino Mandarín · Inglés · Español · Catalán</span></div>
+        </div>
+
+        <a href="#contacto" class="btn-catalan">
+            <span data-i18n="hero_cta">Reservar Visita Personalizada</span>
+            <span>🏛️</span>
+        </a>
+    </header>
+
+    <!-- 2. SOBRE MÍ (Historia Personal, UPF, Trayectoria e Identidad) -->
+    <section id="sobre-mi" class="storyteller-section">
+        <div class="storyteller-frame">
+            <!-- ========================================================================= -->
+            <!-- 📸 INSTRUCCIONES PARA CAMBIAR TU FOTO:                                      -->
+            <!-- Opción A (Archivo local): Guarda tu foto en la misma carpeta y escribe:   -->
+            <!--   src="tu-foto.jpg"                                                       -->
+            <!-- Opción B (URL en la web): Pega el enlace directo a tu imagen en:          -->
+            <!--   src="https://tudominio.com/tu-foto.jpg"                                 -->
+            <!-- ========================================================================= -->
+            <img 
+                id="profilePhoto"
+                src="https://res.cloudinary.com/o7imke3b/image/upload/v1788042723/WhatsApp_Image_2026-08-30_at_00.18.19_2.jpg" 
+                alt="Retrato de la guía turística y traductora" 
+                class="storyteller-img"
+            >
+            <div class="storyteller-stamp" data-i18n="about_badge">Graduada UPF · Puente Intercultural</div>
+        </div>
+
+        <div class="storyteller-content">
+            <span class="chapter-num" data-i18n="chapter_about">Capítulo I · Mi Historia</span>
+            <h2 data-i18n="about_title">"Del sureste de Londres al corazón del Mediterráneo: tejiendo historias entre culturas."</h2>
+            
+            <p data-i18n="about_p1">Crecí entre el bullicio del sureste de Londres, pero los caminos de la vida me llevaron hasta este refugio mediterráneo que, poco a poco, me robó el corazón. Llegué a Barcelona a los veintiséis años, tras haber vivido enriquecedoras experiencias en <strong>Asia Oriental y América Latina</strong>. Desde entonces, esta ciudad se convirtió en mi hogar y en una fuente inagotable de fascinación.</p>
+            
+            <p data-i18n="about_p2">Soy <strong>graduada de la Universitat Pompeu Fabra de Barcelona</strong>, especializada en <strong>traducción entre chino mandarín y español</strong>. Actualmente, compagino mi labor como guía turística con proyectos de traducción y servicios lingüísticos en <strong>chino mandarín, inglés, español y catalán</strong>. Esta combinación me permite acercarme a Barcelona desde una perspectiva especialmente intercultural y comunicar su historia con calidez y rigor a personas de todo el mundo.</p>
+
+            <div class="timeline-grid">
+                <div class="timeline-card">
+                    <h4 data-i18n="card_sustainable_title">🌿 Turismo Consciente</h4>
+                    <p data-i18n="card_sustainable_desc">Creo firmemente en un turismo sostenible y respetuoso en Europa, que apoye a las comunidades locales y devele rincones que pasan desapercibidos.</p>
+                </div>
+                <div class="timeline-card">
+                    <h4 data-i18n="card_residents_title">🏘️ Para Visitantes & Residentes</h4>
+                    <p data-i18n="card_residents_desc">Diseño experiencias con significado tanto para quienes descubren Barcelona por primera vez como para vecinos que llevan toda la vida aquí.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cita de Manifiesto y Filosofía -->
+    <section class="quote-banner">
+        <p class="quote-text" data-i18n="quote_text">"Mi objetivo es que visitantes y residentes compartan, desde miradas diversas, el encanto, la historia y la riqueza cultural de esta ciudad."</p>
+        <p class="quote-author" data-i18n="quote_author">— Manifiesto Descobreix Barcelona</p>
+    </section>
+
+    <!-- 3. SERVICIOS Y EXPERIENCIAS -->
+    <section id="servicios" class="services-section">
+        <div class="section-header">
+            <span class="chapter-num" data-i18n="chapter_services">Capítulo II · Experiencias & Servicios</span>
+            <h2 data-i18n="services_title">Experiencias Culturales a tu Medida</h2>
+            <p data-i18n="services_subtitle">Visitas privadas, walking tours y servicios lingüísticos adaptables a tus intereses, ritmo y proyecto.</p>
+        </div>
+
+        <div class="pricing-note" data-i18n="pricing_note">
+            💡 <em>Nota: Tarifas orientativas por grupo/visita. Adaptamos el itinerario y presupuesto según tu plan de viaje o necesidades de empresa.</em>
+        </div>
+
+        <div class="services-grid">
+            
+            <!-- Servicio 1: Walking Tours Clásicos & Secretos de Barcelona -->
+            <div class="tour-card">
+                <div class="card-media">
+                    <div class="card-img img-serv1" title="Walking Tour por el Barrio Gótico y Modernismo de Gaudí"></div>
+                    <span class="card-price-tag" data-i18n="serv1_price">Desde 160 € / ruta</span>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3 data-i18n="serv1_title">Walking Tours: Clásicos & Secretos</h3>
+                        <p data-i18n="serv1_desc">Recorridos a pie por los dos mil años de historia de Barcelona: vestigios romanos de Barcino, claustros góticos, el Modernismo de Gaudí y rincones que escapan a las rutas turísticas habituales.</p>
+                        <ul class="card-features">
+                            <li><span class="feature-icon">🏛️</span> <span data-i18n="serv1_f1">Barri Gòtic, Born y joyas del Modernismo</span></li>
+                            <li><span class="feature-icon">🗣️</span> <span data-i18n="serv1_f2">En chino mandarín, inglés, español y catalán</span></li>
+                            <li><span class="feature-icon">📜</span> <span data-i18n="serv1_f3">Historia documentada, leyendas y anécdotas</span></li>
+                        </ul>
+                    </div>
+                    <a href="#contacto" class="card-action" data-i18n="btn_reserve_serv">Reservar Walking Tour</a>
+                </div>
+            </div>
+
+            <!-- Servicio 2: Rutas Privadas en Barcelona y Catalunya -->
+            <div class="tour-card">
+                <div class="card-media">
+                    <div class="card-img img-serv2" title="Rutas privadas por Montserrat y pueblos de Catalunya"></div>
+                    <span class="card-price-tag" data-i18n="serv2_price">Desde 320 € / día</span>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3 data-i18n="serv2_title">Rutas Privadas: BCN & Catalunya</h3>
+                        <p data-i18n="serv2_desc">Itinerarios exclusivos diseñados a medida para ti o tu grupo. Desde la montaña sagrada de Montserrat hasta la Girona medieval, el universo de Dalí y calas de la Costa Brava.</p>
+                        <ul class="card-features">
+                            <li><span class="feature-icon">⛰️</span> <span data-i18n="serv2_f1">Montserrat, Girona, Figueres y Costa Brava</span></li>
+                            <li><span class="feature-icon">✨</span> <span data-i18n="serv2_f2">Itinerarios 100% personalizados y flexibles</span></li>
+                            <li><span class="feature-icon">🚗</span> <span data-i18n="serv2_f3">Logística completa y gestión de accesos</span></li>
+                        </ul>
+                    </div>
+                    <a href="#contacto" class="card-action" data-i18n="btn_reserve_serv">Diseñar Ruta Privada</a>
+                </div>
+            </div>
+
+            <!-- Servicio 3: Rutas para Residentes & Servicios Culturales/Lingüísticos -->
+            <div class="tour-card">
+                <div class="card-media">
+                    <div class="card-img img-serv3" title="Rutas culturales para residentes de Barcelona y servicios lingüísticos"></div>
+                    <span class="card-price-tag" data-i18n="serv3_price">Desde 25 € / pers.</span>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3 data-i18n="serv3_title">Rutas Residentes & Servicios Lingüísticos</h3>
+                        <p data-i18n="serv3_desc">Experiencias para residentes que buscan profundizar en la historia oculta de sus barrios, junto con servicios profesionales de traducción y consultoría cultural en chino mandarín, inglés, español y catalán.</p>
+                        <ul class="card-features">
+                            <li><span class="feature-icon">🏘️</span> <span data-i18n="serv3_f1">Monográficos sobre historia barrial y gremios</span></li>
+                            <li><span class="feature-icon">🤝</span> <span data-i18n="serv3_f2">Encuentros culturales e intercambio lingüístico</span></li>
+                            <li><span class="feature-icon">📚</span> <span data-i18n="serv3_f3">Traducción profesional y consultoría cultural</span></li>
+                        </ul>
+                    </div>
+                    <a href="#contacto" class="card-action" data-i18n="btn_reserve_serv">Consultar Próximas Fechas</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. POLÍTICA DE RESERVAS Y CANCELACIONES -->
+    <section id="politicas" class="policy-section">
+        <div class="policy-container">
+            <div class="section-header" style="margin-bottom: 25px;">
+                <span class="chapter-num" data-i18n="chapter_policies">Capítulo III · Compromiso & Transparencia</span>
+                <h2 data-i18n="policy_title">Política de Reservas y Cancelaciones</h2>
+                <p data-i18n="policy_sub">Garantizamos total claridad para que planifiques tu visita o evento cultural con total tranquilidad.</p>
+            </div>
+
+            <div class="policy-grid">
+                <div class="policy-card">
+                    <h4><span>📅</span> <span data-i18n="pol1_h">Cómo Reservar</span></h4>
+                    <p data-i18n="pol1_p">Las reservas se solicitan a través de nuestro formulario web o vía email, WhatsApp, WeChat o Line. Tras acordar fecha, idioma e itinerario, recibirás la confirmación oficial con el punto de encuentro detallado.</p>
+                </div>
+                <div class="policy-card">
+                    <h4><span>⏳</span> <span data-i18n="pol2_h">Aviso Mínimo de 48 Horas</span></h4>
+                    <p data-i18n="pol2_p">Entendemos que los planes de viaje pueden cambiar. Cualquier cambio de fecha o cancelación notificada con al menos <strong>48 horas de antelación</strong> se reprograma o reembolsa sin recargo.</p>
+                </div>
+                <div class="policy-card">
+                    <h4><span>⚖️</span> <span data-i18n="pol3_h">Cancelaciones Tardías</span></h4>
+                    <p data-i18n="pol3_p">Las cancelaciones con menos de 48 horas de margen implican un coste del 50% en concepto de bloqueo de agenda de la guía, preparación de accesos y gastos logísticos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FORMULARIO DE CONTACTO E INFORMACIÓN DIRECTA -->
+    <section id="contacto" class="contact-section">
+        <div class="section-header">
+            <span class="chapter-num" data-i18n="chapter_contact">Capítulo IV · Contacto Directo</span>
+            <h2 data-i18n="contact_title">Descubramos Barcelona Juntos</h2>
+            <p data-i18n="contact_sub">Escríbeme para reservar una ruta, solicitar una visita privada o pedir información para grupos, residentes y servicios de traducción. Respondo en menos de 24 horas.</p>
+        </div>
+
+        <div class="contact-layout">
+            <!-- Formulario de Contacto -->
+            <div class="contact-form-card">
+                <form id="leadForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="nameInput" data-i18n="form_name">Nombre Completo *</label>
+                        <input type="text" id="nameInput" class="form-control" placeholder="Ej. Alexia Puig / David Chen" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailInput" data-i18n="form_email">Correo Electrónico *</label>
+                        <input type="email" id="emailInput" class="form-control" placeholder="tuemail@dominio.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceSelect" data-i18n="form_service">Experiencia o Servicio Deseado</label>
+                        <select id="serviceSelect" class="form-control">
+                            <option value="walking_tour" data-i18n="opt_serv1">Walking Tour: Clásicos & Secretos de Barcelona</option>
+                            <option value="ruta_privada" data-i18n="opt_serv2">Ruta Privada Personalizada (BCN & Catalunya)</option>
+                            <option value="ruta_residentes" data-i18n="opt_serv3">Rutas Culturales para Residentes</option>
+                            <option value="servicios_linguisticos" data-i18n="opt_serv4">Servicios Lingüísticos y Traducción</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="langSelect" data-i18n="form_pref_lang">Idioma Preferido para la Visita / Servicio</label>
+                        <select id="langSelect" class="form-control">
+                            <option value="castellano">Español (Castellano)</option>
+                            <option value="chinese">中文 (Chino Mandarín)</option>
+                            <option value="english">English (Inglés)</option>
+                            <option value="catala">Català (Catalán)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="messageInput" data-i18n="form_msg">Mensaje, Fechas y Número de Personas *</label>
+                        <textarea id="messageInput" class="form-control" placeholder="Indica fechas estimadas, número de asistentes, intereses particulares o detalles del proyecto..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-catalan" style="width: 100%; justify-content: center;">
+                        <span data-i18n="form_submit">Enviar Consulta</span>
+                        <span>📩</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Información de Contacto Directo (Con WeChat y Line) -->
+            <div class="contact-info-cards">
+                <div class="info-card">
+                    <div class="info-card-icon">✉️</div>
+                    <div class="info-card-content">
+                        <h5 data-i18n="info_email_lbl">Correo Electrónico</h5>
+                        <p>janehj@hotmail.com</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">📞</div>
+                    <div class="info-card-content">
+                        <h5 data-i18n="info_tel_lbl">Teléfono / WhatsApp</h5>
+                        <p>+34 697 904 279</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">💬</div>
+                    <div class="info-card-content">
+                        <h5 data-i18n="info_chat_lbl">WeChat & Line</h5>
+                        <p>WeChat ID: janeapril98 · Line ID: @janejones98</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">🗣️</div>
+                    <div class="info-card-content">
+                        <h5 data-i18n="info_lang_lbl">Idiomas de Trabajo</h5>
+                        <p>Chino Mandarín · Inglés · Español · Catalán</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">📍</div>
+                    <div class="info-card-content">
+                        <h5 data-i18n="info_loc_lbl">Base de Actividad</h5>
+                        <p>Barcelona, Catalunya</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER: Huevo de Pascua Cultural y Enlaces Legales -->
+    <footer>
+        <p data-i18n="footer_rights">&copy; 2026 Descobreix Barcelona Tours & Servicios Culturales. Acercando el patrimonio de Catalunya con mirada cercana y multicultural.</p>
+        
+        <!-- Botón del Panot -->
+        <div class="panot-trigger-wrap">
+            <button class="panot-btn" id="panotEasterEgg" title="¡Haz clic para una lluvia cultural de celebración!" aria-label="Lluvia cultural de Barcelona">
+                🌸
+            </button>
+        </div>
+        <p class="panot-hint" data-i18n="panot_hint">¡Pulsa la flor del Panot de Barcelona para celebrar!</p>
+
+        <div class="footer-legal">
+            <div>
+                <span data-i18n="legal_respect">Visitas guiadas sostenibles y respetuosas con las comunidades locales y el patrimonio histórico.</span>
+            </div>
+            <div>
+                <a href="javascript:void(0)" onclick="toggleModal('legalModal')" data-i18n="legal_notice_link">Aviso Legal & Privacidad</a> · 
+                <a href="javascript:void(0)" onclick="toggleModal('cookieModal')" data-i18n="cookie_manage">Ajustes de Cookies</a> · 
+                <a href="javascript:void(0)" onclick="toggleModal('accessModal')" data-i18n="access_manage">Accesibilidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE ACCESIBILIDAD -->
+    <div class="modal-backdrop" id="accessModal" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <button class="modal-close" onclick="toggleModal('accessModal')" aria-label="Cerrar modal">&times;</button>
+            <h3 class="modal-title">♿ <span data-i18n="access_title">Preferencias de Accesibilidad</span></h3>
+            
+            <div class="setting-row">
+                <span data-i18n="access_text_size">Tamaño del Texto</span>
+                <div class="btn-toggle-group">
+                    <button class="toggle-chip active" onclick="setFontScale(1, this)">100%</button>
+                    <button class="toggle-chip" onclick="setFontScale(1.15, this)">115%</button>
+                    <button class="toggle-chip" onclick="setFontScale(1.3, this)">130%</button>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <span data-i18n="access_contrast">Modo Alto Contraste</span>
+                <button class="toggle-chip" id="contrastToggle" onclick="toggleHighContrast()">Off</button>
+            </div>
+
+            <div class="setting-row">
+                <span data-i18n="access_dyslexia">Tipografía Sans Legible</span>
+                <button class="toggle-chip" id="dyslexiaToggle" onclick="toggleDyslexiaFont()">Off</button>
+            </div>
+
+            <div class="setting-row">
+                <span data-i18n="access_motion">Reducir Animaciones</span>
+                <button class="toggle-chip" id="motionToggle" onclick="toggleReducedMotion()">Off</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIGURACIÓN DE COOKIES -->
+    <div class="modal-backdrop" id="cookieModal" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <button class="modal-close" onclick="toggleModal('cookieModal')" aria-label="Cerrar modal">&times;</button>
+            <h3 class="modal-title">🍪 <span data-i18n="cookie_modal_title">Preferencias de Privacidad & Cookies</span></h3>
+            <p style="font-size:0.9rem; color:var(--iron-muted); margin-bottom:20px;" data-i18n="cookie_modal_desc">Utilizamos cookies mínimas para asegurar la navegación y guardar tus preferencias de idioma, de acuerdo con el Aviso Legal y Política de Privacidad.</p>
+            
+            <div class="setting-row">
+                <div>
+                    <strong data-i18n="cookie_essential_title">Estrictamente Necesarias</strong>
+                    <p style="font-size:0.75rem; color:#777;" data-i18n="cookie_essential_desc">Requeridas para la seguridad básica y recordar el idioma.</p>
+                </div>
+                <span style="font-size:0.8rem; color:var(--senyera-gold-dark); font-weight:700;" data-i18n="cookie_always_active">Siempre Activo</span>
+            </div>
+
+            <div class="setting-row">
+                <div>
+                    <strong data-i18n="cookie_interactivity_title">Interactividad Cultural</strong>
+                    <p style="font-size:0.75rem; color:#777;" data-i18n="cookie_interactivity_desc">Recuerda las animaciones y el estado del Panot.</p>
+                </div>
+                <button class="toggle-chip active" id="cookieInteractivity" onclick="this.classList.toggle('active')">Habilitado</button>
+            </div>
+
+            <div style="margin-top:25px; text-align:right;">
+                <button class="btn-cookie-primary" onclick="saveCookieCustomization()" data-i18n="cookie_save_btn">Guardar Preferencias</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE AVISO LEGAL, POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS (LEER MÁS) -->
+    <div class="modal-backdrop" id="legalModal" role="dialog" aria-modal="true">
+        <div class="modal-box large">
+            <button class="modal-close" onclick="toggleModal('legalModal')" aria-label="Cerrar modal">&times;</button>
+            <h3 class="modal-title">⚖️ <span>Aviso Legal, Privacidad & Protección de Datos</span></h3>
+            
+            <div class="legal-document">
+                <h4>Aviso Legal</h4>
+                <p>Bienvenido a <strong>Descobreix Barcelona</strong>, propiedad de <strong>Descobreix BCN Tours & Servicios Culturales</strong>. Al acceder y utilizar este sitio web, aceptas cumplir con los términos y condiciones establecidos en este Aviso Legal. Descobreix Barcelona se reserva el derecho de modificar estos términos en cualquier momento, siendo responsabilidad del usuario revisarlos periódicamente.</p>
+
+                <h5>1. DATOS IDENTIFICATIVOS</h5>
+                <p>En cumplimiento con lo dispuesto en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), se hace constar que el presente sitio web es propiedad de:</p>
+                <ul>
+                    <li><strong>Nombre o Razón Social:</strong> Descobreix Barcelona Tours</li>
+                    <li><strong>Nombre Comercial:</strong> Descobreix BCN</li>
+                    <li><strong>Domicilio:</strong> Passeig de Gràcia, Barcelona, Catalunya, España</li>
+                    <li><strong>Teléfono de contacto:</strong> +34 932 100 850 / +34 612 345 678</li>
+                    <li><strong>Correo electrónico:</strong> contacto@descobreixbcn.com</li>
+                    <li><strong>Pasaportes/NIE/NIF:</strong> Y-1234567-X / B-12345678</li>
+                    <li><strong>Forma jurídica:</strong> Empresarios individuales / Profesionales autónomos</li>
+                    <li><strong>Página web:</strong> www.descobreixbcn.com</li>
+                </ul>
+
+                <h5>2. CONDICIONES DE USO</h5>
+                <p>El acceso y uso de este sitio web atribuye la condición de usuario, lo que implica la aceptación plena y sin reservas de todas las disposiciones incluidas en este Aviso Legal. Se recomienda leer detenidamente el presente documento cada vez que acceda a la web, ya que puede ser modificado sin previo aviso.</p>
+                <p>El usuario se compromete a hacer un uso adecuado de los contenidos y servicios ofrecidos a través de este sitio web y a no emplearlos para incurrir en actividades ilícitas o contrarias a la buena fe y al orden público.</p>
+
+                <h5>3. PROPIEDAD INTELECTUAL E INDUSTRIAL</h5>
+                <p>El contenido del presente sitio web, incluyendo, entre otros, textos, imágenes, logotipos y diseño, están protegidos por derechos de propiedad intelectual e industrial. No está permitida la reproducción, distribución o modificación de los mismos sin la autorización expresa del titular.</p>
+
+                <h5>4. RESPONSABILIDAD</h5>
+                <p>Los titulares del sitio web no se hacen responsables de los daños o perjuicios derivados del uso indebido de la información contenida en esta página, ni del acceso a contenidos externos a los que pueda redirigir este sitio web.</p>
+
+                <h5>5. PROTECCIÓN DE DATOS PERSONALES</h5>
+                <p>En cumplimiento de la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD) y el Reglamento General de Protección de Datos (UE) 2016/679 (RGPD), los datos personales facilitados por los usuarios serán tratados con la finalidad de gestionar las consultas realizadas a través del formulario de contacto o del correo electrónico proporcionado.</p>
+                <p>El usuario puede ejercer sus derechos de acceso, rectificación, supresión, limitación del tratamiento, oposición y portabilidad mediante correo electrónico a <strong>contacto@descobreixbcn.com</strong> adjuntando una copia de su documento de identidad.</p>
+
+                <h5>6. SERVICIOS SUJETOS A AUTORIZACIÓN ADMINISTRATIVA</h5>
+                <p>Los servicios ofrecidos por Descobreix Barcelona en el ámbito de visitas guiadas, rutas culturales, servicios lingüísticos, traducción y gestión cultural no están sujetos a autorización administrativa previa, sin perjuicio del cumplimiento de la normativa vigente en materia de turismo, publicidad y comunicación comercial.</p>
+
+                <h5>7. CONTRATACIÓN ELECTRÓNICA</h5>
+                <p>No se realiza contratación electrónica directa con pasarela de pago obligatoria a través de la web. Los clientes interesados deberán ponerse en contacto mediante formulario, teléfono, WhatsApp, WeChat, Line o correo electrónico para concertar citas, presupuestos y recibir información detallada sobre los servicios ofrecidos.</p>
+
+                <h5>8. INFORMACIÓN SOBRE PRECIOS</h5>
+                <p>Los precios de los servicios ofrecidos por el promotor se encuentran publicados en la web con carácter orientativo e incluyen los impuestos aplicables. Para obtener información detallada sobre tarifas y condiciones personalizadas, se recomienda contactar directamente con los responsables de la empresa.</p>
+
+                <h5>9. LEGISLACIÓN APLICABLE Y JURISDICCIÓN</h5>
+                <p>El presente Aviso Legal se rige por la normativa española. Para la resolución de cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, ambas partes acuerdan someterse a los Juzgados y Tribunales de la ciudad de Barcelona.</p>
+
+                <h4>Política de Privacidad</h4>
+                <p>Conforme al Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica de Protección de Datos y Garantía de Derechos Digitales (LOPDGDD), el promotor se compromete a proteger la privacidad de los usuarios de este sitio web. La información personal recopilada se utilizará exclusivamente para fines administrativos y de gestión de servicios. No compartiremos ni venderemos tu información a terceros y tomaremos las medidas necesarias para garantizar su seguridad.</p>
+                <p>Además, en cumplimiento de la Ley 34/2002, de 11 de julio, de servicios de la sociedad de la información y de comercio electrónico, garantizamos la transparencia y seguridad en la gestión de tu información personal. A continuación, destacamos aspectos clave:</p>
+                
+                <h5>Condiciones del Servicio:</h5>
+                <p>Al contratar nuestros servicios, aceptas las condiciones del servicio, que incluyen itinerarios, puntos de encuentro, horarios de realización, tarifas acordadas y políticas de cancelación.</p>
+
+                <h5>Gestión de Datos Personales:</h5>
+                <p>La privacidad de tus datos es nuestra prioridad. Tu información personal se utilizará exclusivamente con fines administrativos. No compartimos ni vendemos tu información a terceros. Puedes acceder, rectificar o eliminar tus datos en cualquier momento a través del contacto proporcionado en esta página web.</p>
+
+                <h5>Condiciones de los Contratos:</h5>
+                <p>En las reservas y presupuestos se establecerán los términos y condiciones específicos del servicio, así como las cláusulas que se pacten, incluyendo obligaciones de ambas partes, detalles sobre los pagos, la prestación de la visita y las formas de terminación del servicio en su debido caso.</p>
+
+                <h5>Política de Cookies:</h5>
+                <p>Utilizamos cookies para analizar el tráfico del sitio web y optimizar tu experiencia en el mismo. Al aceptar nuestro uso de cookies, tus datos de navegación no identificativos se agregarán a los de otros usuarios con fines estadísticos.</p>
+
+                <h5>Derechos de los Usuarios:</h5>
+                <p>Los usuarios tienen derecho a acceder, rectificar, cancelar u oponerse al tratamiento de sus datos personales. Para ejercer estos derechos o realizar consultas sobre nuestra política de privacidad y cookies, comunícate con nosotros a través de la información de contacto proporcionada en este sitio web (en el apartado de contacto o al correo contacto@descobreixbcn.com).</p>
+
+                <h5>Responsabilidad del Usuario:</h5>
+                <p>El usuario se compromete a utilizar este sitio web de manera legal y conforme a estos términos. Descobreix Barcelona no se hace responsable de los daños o perjuicios causados por el uso indebido del sitio.</p>
+
+                <h4>Política de Protección de Datos (LOPDGDD / RGPD)</h4>
+                <p>La presente página web, en aplicación de la normativa vigente en materia de protección de datos de carácter personal, informa que los datos personales que se recogen a través del Sitio web: <strong>www.descobreixbcn.com</strong>, se incluyen en los ficheros automatizados específicos de usuarios de los servicios de www.descobreixbcn.com, propiedad de <strong>Descobreix Barcelona Tours</strong>.</p>
+                <p>La recogida y tratamiento automatizado de los datos de carácter personal tiene finalidad meramente administrativa y de mantenimiento de la relación comercial, así como el desempeño de tareas de información.</p>
+                <p>No cedemos, compartimos ni vendemos tus datos e información a terceros. Asimismo, Descobreix Barcelona adopta las medidas necesarias para garantizar la seguridad, integridad y confidencialidad de los datos, conforme a lo dispuesto en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de los mismos.</p>
+                <p>El usuario podrá en cualquier momento ejercitar los derechos de acceso, oposición, rectificación y cancelación reconocidos en el citado Reglamento (UE). El ejercicio de estos derechos puede realizarlo el propio usuario en cualquier momento a través del contacto ofrecido en la presente página web o a través de email a: <strong>contacto@descobreixbcn.com</strong> o en la dirección: <strong>Passeig de Gràcia, Barcelona, Catalunya, España</strong>.</p>
+                <p>El usuario manifiesta que todos los datos facilitados por él son ciertos y correctos y se compromete a mantenerlos actualizados, comunicando los cambios a Descobreix Barcelona.</p>
+
+                <h5>Finalidad del tratamiento de los datos personales:</h5>
+                <p>¿Con qué finalidad trataremos tus datos personales?<br>
+                En Descobreix Barcelona, trataremos tus datos personales recabados a través del Sitio Web: www.descobreixbcn.com, con las siguientes finalidades:</p>
+                <ul>
+                    <li>En caso de contratación de los bienes y servicios ofertados a través de la web, para mantener la relación contractual, así como la gestión, administración, información, prestación y mejora del servicio.</li>
+                    <li>Envío de información solicitada a través de los formularios dispuestos en la página web.</li>
+                    <li>Remitir boletines (newsletters), así como comunicaciones informativas de rutas, promociones y/o divulgación cultural de Descobreix Barcelona y del sector.</li>
+                </ul>
+                <p>Te recordamos que puedes oponerte al envío de comunicaciones comerciales por cualquier vía y en cualquier momento, remitiendo un correo electrónico a la dirección indicada anteriormente.</p>
+                <p>Los campos de dichos registros son de cumplimentación obligatoria, siendo imposible realizar las finalidades expresadas si no se aportan esos datos.</p>
+
+                <h5>¿Por cuánto tiempo se conservan los datos personales recabados?</h5>
+                <p>Los datos personales proporcionados se conservarán mientras se mantenga la relación comercial o no solicites su supresión y durante el plazo por el cual pudieran derivarse responsabilidades legales por los servicios prestados.</p>
+
+                <h5>Legitimación:</h5>
+                <p>El tratamiento de tus datos se realiza con las siguientes bases jurídicas que legitiman el mismo:</p>
+                <ul>
+                    <li>La solicitud de información y/o la contratación de los servicios de Descobreix Barcelona, cuyos términos y condiciones se pondrán a tu disposición en todo caso, de forma previa a una eventual contratación.</li>
+                    <li>El consentimiento libre, específico, informado e inequívoco, en tanto que te informamos poniendo a tu disposición la presente política de privacidad, que tras la lectura de la misma, en caso de estar conforme, puedes aceptar mediante una declaración o una clara acción afirmativa, como el marcado de una casilla dispuesta al efecto.</li>
+                </ul>
+                <p>En caso de que no nos facilites tus datos o lo hagas de forma errónea o incompleta, no podremos atender tu solicitud, resultando del todo imposible proporcionarte la información solicitada o llevar a cabo la contratación de los servicios.</p>
+
+                <h5>Destinatarios:</h5>
+                <p>Los datos no se comunicarán a ningún tercero ajeno a Descobreix Barcelona, salvo obligación legal. Puedes consultar la política de privacidad y demás aspectos legales de la compañía en www.descobreixbcn.com.</p>
+
+                <h5>Datos recopilados por usuarios de los servicios:</h5>
+                <p>En los casos en que el usuario incluya ficheros con datos de carácter personal en los servidores de alojamiento compartido, Descobreix Barcelona no se hace responsable del incumplimiento por parte del usuario del RGPD.</p>
+
+                <h5>Retención de datos en conformidad a la LSSI:</h5>
+                <p>Descobreix Barcelona informa que, como prestador de servicio de alojamiento de datos y en virtud de lo establecido en la Ley 34/2002 de 11 de julio de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI), retiene por un periodo máximo de 12 meses la información imprescindible para identificar el origen de los datos alojados y el momento en que se inició la prestación del servicio. La retención de estos datos no afecta al secreto de las comunicaciones y sólo podrán ser utilizados en el marco de una investigación criminal o para la salvaguardia de la seguridad pública, poniéndose a disposición de los jueces y/o tribunales o del Ministerio que así los requiera.</p>
+                <p>La comunicación de datos a las Fuerzas y Cuerpos del Estado se hará en virtud a lo dispuesto en la normativa sobre protección de datos personales.</p>
+
+                <h5>Propiedad intelectual del software:</h5>
+                <p>El usuario debe respetar los programas de terceros puestos a su disposición por Descobreix Barcelona, aun siendo gratuitos y/o de disposición pública. El usuario no adquiere derecho alguno o licencia por el servicio contratado, sobre el software necesario para la prestación del servicio, ni tampoco sobre la información técnica de seguimiento del servicio, excepción hecha de los derechos y licencias necesarios para el cumplimiento de los servicios contratados y únicamente durante la duración de los mismos.</p>
+                <p>Para toda actuación que exceda del cumplimiento del contrato, el usuario necesitará autorización por escrito por parte de Descobreix Barcelona, quedando prohibido al usuario acceder, modificar, visualizar la configuración, estructura y ficheros de los servidores propiedad de Descobreix Barcelona, asumiendo la responsabilidad civil y penal derivada de cualquier incidencia que se pudiera producir en los servidores y sistemas de seguridad como consecuencia directa de una actuación negligente o maliciosa por su parte.</p>
+
+                <h5>Propiedad intelectual de los contenidos alojados:</h5>
+                <p>Se prohíbe el uso contrario a la legislación sobre propiedad intelectual de los servicios prestados por Descobreix Barcelona y, en particular de:</p>
+                <ul>
+                    <li>La utilización que resulte contraria a las leyes españolas o que infrinja los derechos de terceros.</li>
+                    <li>La publicación o la transmisión de cualquier contenido que, a juicio de Descobreix Barcelona, resulte violento, obsceno, abusivo, ilegal, racial, xenófobo o difamatorio.</li>
+                    <li>Los cracks, números de serie de programas o cualquier otro contenido que vulnere derechos de la propiedad intelectual de terceros.</li>
+                    <li>La recogida y/o utilización de datos personales de otros usuarios sin su consentimiento expreso o contraviniendo lo dispuesto en Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016.</li>
+                    <li>La utilización del servidor de correo del dominio y de las direcciones de correo electrónico para el envío de correo masivo no deseado.</li>
+                </ul>
+
+                <h5>Derechos de terceros y protección de menores:</h5>
+                <p>El usuario es responsable respecto a las leyes y reglamentos en vigor y las reglas que tienen que ver con el funcionamiento del servicio online, comercio electrónico, derechos de autor, mantenimiento del orden público, así como principios universales de uso de Internet.</p>
+                <p>El usuario indemnizará a Descobreix Barcelona por los gastos que generara la imputación de la misma en alguna causa cuya responsabilidad fuera atribuible al usuario, incluidos honorarios y gastos de defensa jurídica, incluso en el caso de una decisión judicial no definitiva.</p>
+
+                <h5>Protección de la información alojada:</h5>
+                <p>Descobreix Barcelona realiza copias de seguridad de los contenidos alojados en sus servidores, sin embargo, no se responsabiliza de la pérdida o el borrado accidental de los datos por parte de los usuarios. De igual manera, no garantiza la reposición total de los datos borrados por los usuarios, ya que los citados datos podrían haber sido suprimidos y/o modificados durante el periodo del tiempo transcurrido desde la última copia de seguridad.</p>
+
+                <h5>Comunicaciones comerciales:</h5>
+                <p>En aplicación de la LSSI, Descobreix Barcelona no enviará comunicaciones publicitarias o promocionales por correo electrónico u otro medio de comunicación electrónica equivalente que previamente no hubieran sido solicitadas o expresamente autorizadas por los destinatarios de las mismas.</p>
+                <p>En el caso de usuarios con los que exista una relación contractual previa, Descobreix Barcelona sí está autorizado al envío de comunicaciones comerciales referentes a productos o servicios de la empresa que sean similares a los que inicialmente fueron objeto de contratación con el cliente.</p>
+                <p>En todo caso, el usuario, tras acreditar su identidad, podrá solicitar que no se le haga llegar más información comercial a través de los canales de Atención al Cliente escribiendo a <strong>contacto@descobreixbcn.com</strong>.</p>
+            </div>
+
+            <div style="margin-top:25px; text-align:right;">
+                <button class="btn-cookie-primary" onclick="toggleModal('legalModal')">Cerrar y Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE MENSAJE ENVIADO -->
+    <div class="modal-backdrop" id="feedbackModal" role="dialog" aria-modal="true">
+        <div class="modal-box" style="text-align: center;">
+            <button class="modal-close" onclick="toggleModal('feedbackModal')" aria-label="Cerrar modal">&times;</button>
+            <div style="font-size: 3rem; margin-bottom: 15px;">📨</div>
+            <h3 class="modal-title" style="justify-content: center;" data-i18n="modal_sent_title">¡Mensaje Recibido!</h3>
+            <p style="color: var(--iron-muted); line-height: 1.6; margin-bottom: 25px;" data-i18n="modal_sent_desc">Gracias por contactar con nosotros. Revisaré tu solicitud personalmente y te responderé en un plazo máximo de 24 horas.</p>
+            <button class="btn-catalan" onclick="toggleModal('feedbackModal')" style="justify-content: center; width: 100%;">
+                <span data-i18n="modal_sent_btn">Aceptar</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- BANNER DE COOKIES (Visible a primera vista con vínculo directo a Aviso Legal) -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-text">
+            <h4>🍪 <span data-i18n="cookie_banner_title">Aviso de Cookies & Privacidad</span></h4>
+            <p data-i18n="cookie_banner_desc">Utilizamos cookies propias y de análisis para recordar tus preferencias de idioma, analizar el tráfico web y ofrecerte una experiencia cultural enriquecedora. Consulta nuestro <a href="javascript:void(0)" onclick="toggleModal('legalModal')" style="color:var(--sang-crimson); font-weight:700; text-decoration:underline;">Aviso Legal y Política de Privacidad</a>.</p>
+        </div>
+        <div class="cookie-actions">
+            <button class="btn-cookie-secondary" onclick="toggleModal('cookieModal')" data-i18n="cookie_custom_btn">Configurar</button>
+            <button class="btn-cookie-link" onclick="toggleModal('legalModal')" data-i18n="cookie_read_more">Leer Más / Aviso Legal</button>
+            <button class="btn-cookie-primary" onclick="acceptAllCookies()" data-i18n="cookie_accept_btn">Aceptar Todo</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS: Internacionalización, Modales, Accesibilidad y Animación -->
+    <script>
+        // DICCIONARIOS MULTILINGÜES ACTUALIZADOS (Chino Mandarín, Inglés, Español, Catalán en todas las opciones)
+        const i18nData = {
+            es: {
+                tagline: "Tours & Experiencias Culturales",
+                nav_home: "Inicio",
+                nav_about: "Mi Historia",
+                nav_services: "Experiencias",
+                nav_policies: "Reservas & Cancelación",
+                nav_contact: "Contacto",
+                hero_badge: "Walking Tours · Rutas Privadas · Servicios Culturales",
+                hero_title: "Descubre Barcelona <span>Con Otros Ojos</span>",
+                hero_subtitle: "Con su historia de más de dos mil años, las calles, plazas y edificios de Barcelona esconden secretos. Te invito a descubrirlos conmigo, más allá de los lugares de siempre, desde una mirada cercana, multilingüe e intercultural.",
+                pillar_1: "De Londres a Barcelona",
+                pillar_2: "Graduada UPF en Traducción",
+                pillar_3: "Turismo Consciente & Sostenible",
+                pillar_4: "Chino Mandarín · Inglés · Español · Catalán",
+                hero_cta: "Reservar Visita Personalizada",
+                chapter_about: "Capítulo I · Mi Historia",
+                about_badge: "Graduada UPF · Puente Intercultural",
+                about_title: "\"Del sureste de Londres al corazón del Mediterráneo: tejiendo historias entre culturas.\"",
+                about_p1: "Crecí entre el bullicio del sureste de Londres, pero los caminos de la vida me llevaron hasta este refugio mediterráneo que, poco a poco, me robó el corazón. Llegué a Barcelona a los veintiséis años, tras haber vivido enriquecedoras experiencias en <strong>Asia Oriental y América Latina</strong>. Desde entonces, esta ciudad se convirtió en mi hogar y en una fuente inagotable de fascinación.",
+                about_p2: "Soy <strong>graduada de la Universitat Pompeu Fabra de Barcelona</strong>, especializada en <strong>traducción entre chino mandarín y español</strong>. Actualmente, compagino mi labor como guía turística con proyectos de traducción y servicios lingüísticos en <strong>chino mandarín, inglés, español y catalán</strong>. Esta combinación me permite acercarme a Barcelona desde una perspectiva especialmente intercultural y comunicar su historia con calidez y rigor a personas de todo el mundo.",
+                card_sustainable_title: "🌿 Turismo Consciente",
+                card_sustainable_desc: "Creo firmemente en un turismo sostenible y respetuoso en Europa, que apoye a las comunidades locales y devele rincones que pasan desapercibidos.",
+                card_residents_title: "🏘️ Para Visitantes & Residentes",
+                card_residents_desc: "Diseño experiencias con significado tanto para quienes descubren Barcelona por primera vez como para vecinos que llevan toda la vida aquí.",
+                quote_text: "\"Mi objetivo es que visitantes y residentes compartan, desde miradas diversas, el encanto, la historia y la riqueza cultural de esta ciudad.\"",
+                quote_author: "— Manifiesto Descobreix Barcelona",
+                chapter_services: "Capítulo II · Experiencias & Servicios",
+                services_title: "Experiencias Culturales a tu Medida",
+                services_subtitle: "Visitas privadas, walking tours y servicios lingüísticos adaptables a tus intereses, ritmo y proyecto.",
+                pricing_note: "💡 <em>Nota: Tarifas orientativas por grupo/visita. Adaptamos el itinerario y presupuesto según tu plan de viaje o necesidades de empresa.</em>",
+                serv1_title: "Walking Tours: Clásicos & Secretos",
+                serv1_price: "Desde 160 € / ruta",
+                serv1_desc: "Recorridos a pie por los dos mil años de historia de Barcelona: vestigios romanos de Barcino, claustros góticos, el Modernismo de Gaudí y rincones que escapan a las rutas turísticas habituales.",
+                serv1_f1: "Barri Gòtic, Born y joyas del Modernismo",
+                serv1_f2: "En chino mandarín, inglés, español y catalán",
+                serv1_f3: "Historia documentada, leyendas y anécdotas",
+                serv2_title: "Rutas Privadas: BCN & Catalunya",
+                serv2_price: "Desde 320 € / día",
+                serv2_desc: "Itinerarios exclusivos diseñados a medida para ti o tu grupo. Desde la montaña sagrada de Montserrat hasta la Girona medieval, el universo de Dalí y calas de la Costa Brava.",
+                serv2_f1: "Montserrat, Girona, Figueres y Costa Brava",
+                serv2_f2: "Itinerarios 100% personalizados y flexibles",
+                serv2_f3: "Logística completa y gestión de accesos",
+                serv3_title: "Rutas Residentes & Servicios Lingüísticos",
+                serv3_price: "Desde 25 € / pers.",
+                serv3_desc: "Experiencias para residentes que buscan profundizar en la historia oculta de sus barrios, junto con servicios profesionales de traducción y consultoría cultural en chino mandarín, inglés, español y catalán.",
+                serv3_f1: "Monográficos sobre historia barrial y gremios",
+                serv3_f2: "Encuentros culturales e intercambio lingüístico",
+                serv3_f3: "Traducción profesional y consultoría cultural",
+                btn_reserve_serv: "Solicitar Reserva",
+                chapter_policies: "Capítulo III · Compromiso & Transparencia",
+                policy_title: "Política de Reservas y Cancelaciones",
+                policy_sub: "Garantizamos total claridad para que planifiques tu visita o evento cultural con total tranquilidad.",
+                pol1_h: "Cómo Reservar",
+                pol1_p: "Las reservas se solicitan a través de nuestro formulario web o vía email, WhatsApp, WeChat o Line. Tras acordar fecha, idioma e itinerario, recibirás la confirmación oficial con el punto de encuentro detallado.",
+                pol2_h: "Aviso Mínimo de 48 Horas",
+                pol2_p: "Entendemos que los planes de viaje pueden cambiar. Cualquier cambio de fecha o cancelación notificada con al menos <strong>48 horas de antelación</strong> se reprograma o reembolsa sin recargo.",
+                pol3_h: "Cancelaciones Tardías",
+                pol3_p: "Las cancelaciones con menos de 48 horas de margen implican un coste del 50% en concepto de bloqueo de agenda de la guía, preparación de accesos y gastos logísticos.",
+                chapter_contact: "Capítulo IV · Contacto Directo",
+                contact_title: "Descubramos Barcelona Juntos",
+                contact_sub: "Escríbeme para reservar una ruta, solicitar una visita privada o pedir información para grupos, residentes y servicios de traducción. Respondo en menos de 24 horas.",
+                form_name: "Nombre Completo *",
+                form_email: "Correo Electrónico *",
+                form_service: "Experiencia o Servicio Deseado",
+                opt_serv1: "Walking Tour: Clásicos & Secretos de Barcelona",
+                opt_serv2: "Ruta Privada Personalizada (BCN & Catalunya)",
+                opt_serv3: "Rutas Culturales para Residentes",
+                opt_serv4: "Servicios Lingüísticos y Traducción",
+                form_pref_lang: "Idioma Preferido para la Visita / Servicio",
+                form_msg: "Mensaje, Fechas y Número de Personas *",
+                form_submit: "Enviar Consulta",
+                info_email_lbl: "Correo Electrónico",
+                info_tel_lbl: "Teléfono / WhatsApp",
+                info_chat_lbl: "WeChat & Line",
+                info_lang_lbl: "Idiomas de Trabajo",
+                info_loc_lbl: "Base de Actividad",
+                footer_rights: "© 2026 Descobreix Barcelona Tours & Servicios Culturales. Acercando el patrimonio de Catalunya con mirada cercana y multicultural.",
+                panot_hint: "¡Pulsa la flor del Panot de Barcelona para celebrar!",
+                legal_respect: "Visitas guiadas sostenibles y respetuosas con las comunidades locales y el patrimonio histórico.",
+                legal_notice_link: "Aviso Legal & Privacidad",
+                cookie_manage: "Ajustes de Cookies",
+                access_manage: "Accesibilidad",
+                access_title: "Preferencias de Accesibilidad",
+                access_text_size: "Tamaño del Texto",
+                access_contrast: "Modo Alto Contraste",
+                access_dyslexia: "Tipografía Sans Legible",
+                access_motion: "Reducir Animaciones",
+                cookie_modal_title: "Preferencias de Privacidad & Cookies",
+                cookie_modal_desc: "Utilizamos cookies mínimas para asegurar la navegación y guardar tus preferencias de idioma, de acuerdo con el Aviso Legal y Política de Privacidad.",
+                cookie_essential_title: "Estrictamente Necesarias",
+                cookie_essential_desc: "Requeridas para la seguridad básica y recordar el idioma.",
+                cookie_always_active: "Siempre Activo",
+                cookie_interactivity_title: "Interactividad Cultural",
+                cookie_interactivity_desc: "Recuerda las animaciones y el estado del Panot.",
+                cookie_save_btn: "Guardar Preferencias",
+                cookie_banner_title: "Aviso de Cookies & Privacidad",
+                cookie_banner_desc: "Utilizamos cookies propias y de análisis para recordar tus preferencias de idioma, analizar el tráfico web y ofrecerte una experiencia cultural enriquecedora.",
+                cookie_custom_btn: "Configurar",
+                cookie_read_more: "Leer Más / Aviso Legal",
+                cookie_accept_btn: "Aceptar Todo",
+                modal_sent_title: "¡Mensaje Recibido!",
+                modal_sent_desc: "Gracias por contactar con nosotros. Revisaré tu solicitud personalmente y te responderé en un plazo máximo de 24 horas.",
+                modal_sent_btn: "Aceptar"
+            },
+            ca: {
+                tagline: "Tours & Experiències Culturals",
+                nav_home: "Inici",
+                nav_about: "La Meva Història",
+                nav_services: "Experiències",
+                nav_policies: "Reserves & Cancel·lació",
+                nav_contact: "Contacte",
+                hero_badge: "Walking Tours · Rutes Privades · Serveis Culturals",
+                hero_title: "Descobreix Barcelona <span>Amb Uns Altres Ulls</span>",
+                hero_subtitle: "Amb més de dos mil anys d'història, els carrers, places i edificis de Barcelona amaguen secrets. T'invito a descobrir-los plegats, més enllà dels llocs de sempre, des d'una mirada propera, multilingüe i intercultural.",
+                pillar_1: "De Londres a Barcelona",
+                pillar_2: "Graduada UPF en Traducció",
+                pillar_3: "Turisme Conscient & Sostenible",
+                pillar_4: "Xinès Mandarí · Anglès · Castellà · Català",
+                hero_cta: "Reservar Visita Personalitzada",
+                chapter_about: "Capítol I · La Meva Història",
+                about_badge: "Graduada UPF · Pont Intercultural",
+                about_title: "\"Del sud-est de Londres al cor del Mediterrani: teixint històries entre cultures.\"",
+                about_p1: "Vaig créixer entre el caliu del sud-est de Londres, però els camins de la vida em van portar fins a aquest refugi mediterrani que em va robar el cor. Vaig arribar a Barcelona amb vint-i-sis anys, després d'haver viscut experiències a l'<strong>Àsia Oriental i Amèrica Llatina</strong>. Des d'aleshores, Barcelona és la meva llar.",
+                about_p2: "Sóc <strong>graduada per la Universitat Pompeu Fabra de Barcelona</strong>, especialitzada en <strong>traducció entre xinès mandarí i espanyol</strong>. Compagino la feina de guia turística amb projectes de traducció i serveis lingüístics en <strong>xinès mandarí, anglès, castellà i català</strong>, apropant la ciutat amb rigor i passió intercultural.",
+                card_sustainable_title: "🌿 Turisme Conscient",
+                card_sustainable_desc: "Crec en un turisme sostenible i respectuós a Europa, que posi en valor el teixit veïnal i els espais secrets de la ciutat.",
+                card_residents_title: "🏘️ Per a Visitants & Residents",
+                card_residents_desc: "Creo experiències significatives tant per a qui visita Barcelona per primer cop com per a qui hi viu des de sempre.",
+                quote_text: "\"El meu objectiu és que visitants i residents comparteixin, des de perspectives diverses, la riquesa cultural d'aquesta ciutat.\"",
+                quote_author: "— Manifest Descobreix Barcelona",
+                chapter_services: "Capítol II · Experiències & Serveis",
+                services_title: "Experiències Culturals a la Teva Mida",
+                services_subtitle: "Visites privades, walking tours i serveis lingüístics adaptats als teus interessos i ritme.",
+                pricing_note: "💡 <em>Nota: Tarifes orientatives per grup/visita. Adaptem l'itinerari i el pressupost a les teves necessitats.</em>",
+                serv1_title: "Walking Tours: Clàssics & Secrets",
+                serv1_price: "Des de 160 € / ruta",
+                serv1_desc: "Passejades a peu per dos mil anys d'història: Barcino romana, claustres gòtics, Modernisme de Gaudí i racons secrets de la ciutat.",
+                serv1_f1: "Barri Gòtic, Born i joies modernistes",
+                serv1_f2: "En xinès mandarí, anglès, castellà i català",
+                serv1_f3: "Història documentada, llegendes i anècdotes",
+                serv2_title: "Rutes Privades: BCN & Catalunya",
+                serv2_price: "Des de 320 € / dia",
+                serv2_desc: "Itineraris exclusius a mida: la màgia de Montserrat, la Girona medieval, el triangle dalinià i les cales de la Costa Brava.",
+                serv2_f1: "Montserrat, Girona, Figueres i Costa Brava",
+                serv2_f2: "Itineraris 100% personalitzats",
+                serv2_f3: "Gestió d'accessos i logística inclosa",
+                serv3_title: "Rutes Residents & Serveis Lingüístics",
+                serv3_price: "Des de 25 € / pers.",
+                serv3_desc: "Rutes per a qui viu a Barcelona i vol redescobrir els seus barris, juntament amb serveis de traducció professional i assessoria cultural en xinès mandarí, anglès, castellà i català.",
+                serv3_f1: "Monogràfics sobre història veïnal i gremis",
+                serv3_f2: "Trobades culturals i intercanvi lingüístic",
+                serv3_f3: "Traducció professional i assessoria cultural",
+                btn_reserve_serv: "Demanar Reserva",
+                chapter_policies: "Capítol III · Compromís & Transparència",
+                policy_title: "Política de Reserves i Cancel·lacions",
+                policy_sub: "Transparència perquè planifiquis la teva visita amb total tranquil·litat.",
+                pol1_h: "Com Reservar",
+                pol1_p: "A través del formulari web o contacte per email, WhatsApp, WeChat o Line. Acordem itinerari, data i idioma, i rebràs la confirmació oficial.",
+                pol2_h: "Avís Mínim de 48 Hores",
+                pol2_p: "Qualsevol modificació o cancel·lació notificada amb <strong>48 hores d'antelació</strong> es reprograma o reemborsa sense recàrrec.",
+                pol3_h: "Cancel·lacions Tardanes",
+                pol3_p: "Les cancel·lacions amb menys de 48 hores impliquen un càrrec del 50% per bloqueig d'agenda i preparació logística.",
+                chapter_contact: "Capítol IV · Contacte Directe",
+                contact_title: "Descobrim Barcelona Plegats",
+                contact_sub: "Escriu-me per reservar una ruta, sol·licitar una visita privada o demanar informació per a residents i traducció.",
+                form_name: "Nom Complet *",
+                form_email: "Correu Electrònic *",
+                form_service: "Experiència o Servei Desitjat",
+                opt_serv1: "Walking Tour: Clàssics & Secrets de Barcelona",
+                opt_serv2: "Ruta Privada Personalitzada (BCN & Catalunya)",
+                opt_serv3: "Rutes Culturals per a Residents",
+                opt_serv4: "Serveis Lingüístics i Traducció",
+                form_pref_lang: "Idioma Preferit per a la Visita / Servei",
+                form_msg: "Missatge, Dates i Nombre de Persones *",
+                form_submit: "Enviar Consulta",
+                info_email_lbl: "Correu Electrònic",
+                info_tel_lbl: "Telèfon / WhatsApp",
+                info_chat_lbl: "WeChat & Line",
+                info_lang_lbl: "Idiomes de Treball",
+                info_loc_lbl: "Base d'Activitat",
+                footer_rights: "© 2026 Descobreix Barcelona Tours & Serveis Culturals.",
+                panot_hint: "Prem el Panot de Barcelona per celebrar!",
+                legal_respect: "Visites sostenibles i respectuoses amb el veïnat.",
+                legal_notice_link: "Avís Legal & Privacitat",
+                cookie_manage: "Configuració de Galetes",
+                access_manage: "Accessibilitat",
+                access_title: "Opcions d'Accessibilitat",
+                access_text_size: "Mida del Text",
+                access_contrast: "Mode Alt Contrast",
+                access_dyslexia: "Tipografia Sans Llegible",
+                access_motion: "Reduir Animacions",
+                cookie_modal_title: "Privacitat i Galetes",
+                cookie_modal_desc: "Utilitzem galetes essencials per guardar la vostra llengua de navegació segons l'Avís Legal i Política de Privacitat.",
+                cookie_essential_title: "Estrictament Necessàries",
+                cookie_essential_desc: "Essencials per al funcionament i la seguretat del web.",
+                cookie_always_active: "Sempre Actiu",
+                cookie_interactivity_title: "Interactivitat Cultural",
+                cookie_interactivity_desc: "Recorda l'estat del Panot i les animacions.",
+                cookie_save_btn: "Desar Preferències",
+                cookie_banner_title: "Avís de Galetes & Privacitat",
+                cookie_banner_desc: "Fem servir galetes pròpies i d'anàlisi per garantir la millor navegació d'acord amb el reglament GDPR i el nostre Avís Legal.",
+                cookie_custom_btn: "Configurar",
+                cookie_read_more: "Llegir Més / Avís Legal",
+                cookie_accept_btn: "Acceptar-ho Tot",
+                modal_sent_title: "Missatge Rebut!",
+                modal_sent_desc: "Gràcies per contactar amb nosaltres. Us respondré personalment en un termini màxim de 24 hores.",
+                modal_sent_btn: "D'acord"
+            },
+            en: {
+                tagline: "Walking Tours & Cultural Services",
+                nav_home: "Home",
+                nav_about: "My Story",
+                nav_services: "Experiences",
+                nav_policies: "Bookings & Cancellations",
+                nav_contact: "Contact",
+                hero_badge: "Walking Tours · Private Routes · Cultural Services",
+                hero_title: "Discover Barcelona <span>With Different Eyes</span>",
+                hero_subtitle: "With more than two thousand years of history, the streets, squares, and buildings of Barcelona hide timeless secrets. Discover them beyond the typical sights, with an authentic, multilingual, and intercultural perspective.",
+                pillar_1: "From London to Barcelona",
+                pillar_2: "UPF Graduate in Translation",
+                pillar_3: "Conscious & Sustainable Tourism",
+                pillar_4: "Mandarin Chinese · English · Spanish · Catalan",
+                hero_cta: "Book a Personalized Tour",
+                chapter_about: "Chapter I · My Story",
+                about_badge: "UPF Graduate · Intercultural Bridge",
+                about_title: "\"From Southeast London to the heart of the Mediterranean: weaving stories across cultures.\"",
+                about_p1: "I grew up amidst the vibrant bustle of Southeast London, but life's journey led me to this Mediterranean haven that stole my heart. I arrived in Barcelona at twenty-six, following transformative experiences across <strong>East Asia and Latin America</strong>. Ever since, this city has become my home and an enduring source of fascination.",
+                about_p2: "I hold a degree from <strong>Universitat Pompeu Fabra (UPF) in Barcelona</strong>, specializing in <strong>Mandarin Chinese and Spanish translation</strong>. Today, I combine my work as a local guide with translation and linguistic consultancy in <strong>Mandarin Chinese, English, Spanish, and Catalan</strong>. This unique path allows me to approach Barcelona through an intercultural lens, sharing its living heritage with warmth and rigor.",
+                card_sustainable_title: "🌿 Conscious Tourism",
+                card_sustainable_desc: "I advocate for sustainable, mindful tourism in Europe that respects local neighborhoods and reveals lesser-known cultural gems.",
+                card_residents_title: "🏘️ For Travelers & Residents",
+                card_residents_desc: "Crafting meaningful experiences both for first-time visitors and lifelong residents who wish to rediscover their city.",
+                quote_text: "\"My goal is for travelers and locals alike to share and celebrate the charm, history, and cultural richness of this city from diverse perspectives.\"",
+                quote_author: "— Descobreix Barcelona Manifesto",
+                chapter_services: "Chapter II · Experiences & Services",
+                services_title: "Tailored Cultural Experiences",
+                services_subtitle: "Private walking tours, day escapes, and linguistic services tailored to your rhythm and curiosity.",
+                pricing_note: "💡 <em>Note: Indicative pricing per group/tour. We customize itineraries and budgets to your travel schedule.</em>",
+                serv1_title: "Walking Tours: Classics & Hidden Secrets",
+                serv1_price: "From €160 / tour",
+                serv1_desc: "Stroll through two millennia of history: Roman Barcino remains, Gothic Quarter cloisters, Gaudí's Modernisme masterpieces, and secret alleyways.",
+                serv1_f1: "Gothic Quarter, El Born & Modernist jewels",
+                serv1_f2: "In Mandarin Chinese, English, Spanish, and Catalan",
+                serv1_f3: "Documented history, legends & curious anecdotes",
+                serv2_title: "Private Escapes: BCN & Catalunya",
+                serv2_price: "From €320 / day",
+                serv2_desc: "Exclusive tailor-made itineraries beyond the city: the sacred heights of Montserrat, medieval Girona, Dalí's legacy, and Costa Brava coastal villages.",
+                serv2_f1: "Montserrat, Girona, Figueres & Costa Brava",
+                serv2_f2: "100% personalized and flexible timing",
+                serv2_f3: "Seamless logistics and ticketing included",
+                serv3_title: "Residents Tours & Linguistic Services",
+                serv3_price: "From €25 / person",
+                serv3_desc: "Curated experiences for residents wanting to explore the hidden history of their neighborhoods, plus professional translation and cultural consultancy in Mandarin Chinese, English, Spanish, and Catalan.",
+                serv3_f1: "Thematic explorations of historic districts & guilds",
+                serv3_f2: "Cultural gatherings and multilingual exchange",
+                serv3_f3: "Professional translation and intercultural consulting",
+                btn_reserve_serv: "Request Booking",
+                chapter_policies: "Chapter III · Transparency & Commitment",
+                policy_title: "Booking and Cancellation Policy",
+                policy_sub: "Clear and dependable terms so you can plan your cultural journey with peace of mind.",
+                pol1_h: "How to Book",
+                pol1_p: "Bookings are arranged via our online form, email, WhatsApp, WeChat, or Line. After confirming date, language, and route, you receive an official itinerary with full meeting details.",
+                pol2_h: "48-Hour Notice Policy",
+                pol2_p: "Travel plans can shift. Any cancellation or rescheduling requested with at least <strong>48 hours advance notice</strong> is modified or refunded without penalty.",
+                pol3_h: "Late Cancellations",
+                pol3_p: "Cancellations made with less than 48 hours notice incur a 50% fee covering guide reservation and preliminary logistics.",
+                chapter_contact: "Chapter IV · Direct Contact",
+                contact_title: "Let's Discover Barcelona Together",
+                contact_sub: "Get in touch to reserve a walking tour, design a private escape, or ask about our tours for residents and translation services. I reply within 24 hours.",
+                form_name: "Full Name *",
+                form_email: "Email Address *",
+                form_service: "Desired Experience or Service",
+                opt_serv1: "Walking Tour: Classics & Hidden Secrets",
+                opt_serv2: "Custom Private Escape (BCN & Catalunya)",
+                opt_serv3: "Cultural Tours for Residents",
+                opt_serv4: "Linguistic & Translation Services",
+                form_pref_lang: "Preferred Language for the Tour / Service",
+                form_msg: "Message, Dates & Group Size *",
+                form_submit: "Send Inquiry",
+                info_email_lbl: "Email Address",
+                info_tel_lbl: "Phone / WhatsApp",
+                info_chat_lbl: "WeChat & Line",
+                info_lang_lbl: "Working Languages",
+                info_loc_lbl: "Main Base",
+                footer_rights: "© 2026 Descobreix Barcelona Tours & Cultural Services. Celebrating Catalan heritage with a warm, multicultural perspective.",
+                panot_hint: "Click the Barcelona Panot flower for a celebratory shower!",
+                legal_respect: "Sustainable guiding mindful of local communities and architectural heritage.",
+                legal_notice_link: "Legal Notice & Privacy",
+                cookie_manage: "Cookie Settings",
+                access_manage: "Accessibility",
+                access_title: "Accessibility Preferences",
+                access_text_size: "Text Size",
+                access_contrast: "High Contrast Mode",
+                access_dyslexia: "Legible Sans Font",
+                access_motion: "Reduce Animations",
+                cookie_modal_title: "Privacy & Cookie Preferences",
+                cookie_modal_desc: "We use essential cookies to maintain your language preferences and provide smooth browsing in accordance with our Legal Notice.",
+                cookie_essential_title: "Strictly Essential",
+                cookie_essential_desc: "Required for core security and remembering your language.",
+                cookie_always_active: "Always Active",
+                cookie_interactivity_title: "Cultural Interactivity",
+                cookie_interactivity_desc: "Remembers Panot easter egg and animation settings.",
+                cookie_save_btn: "Save Preferences",
+                cookie_banner_title: "Cookie & Privacy Notice",
+                cookie_banner_desc: "We use cookies to preserve your language selection, evaluate web performance, and respect EU GDPR standards.",
+                cookie_custom_btn: "Customize",
+                cookie_read_more: "Read More / Legal Notice",
+                cookie_accept_btn: "Accept All",
+                modal_sent_title: "Message Received!",
+                modal_sent_desc: "Thank you for contacting us. I will review your inquiry and reply within 24 hours.",
+                modal_sent_btn: "OK"
+            },
+            "zh-hans": {
+                tagline: "城市漫步与深度文化服务",
+                nav_home: "首页",
+                nav_about: "我的故事",
+                nav_services: "体验与服务",
+                nav_policies: "预约与取消政策",
+                nav_contact: "联系我们",
+                hero_badge: "徒步漫游 · 私人定制路线 · 深度文化服务",
+                hero_title: "以全新视角 <span>发现巴塞罗那</span>",
+                hero_subtitle: "两千余年的历史积淀，让巴塞罗那的街巷、广场与建筑蕴藏着无数秘密。邀您与我同行，跳出走马观花的常规路线，以亲切、多语种与跨文化的视角，触摸这座城市真正的灵魂。",
+                pillar_1: "从伦敦到巴塞罗那",
+                pillar_2: "庞培法布拉大学翻译专业毕业",
+                pillar_3: "倡导可持续与深度在地体验",
+                pillar_4: "中文普通话 · 英语 · 西班牙语 · 加泰罗尼亚语",
+                hero_cta: "预约专属定制导览",
+                chapter_about: "第一章 · 我的故事",
+                about_badge: "UPF 毕业 · 跨文化桥梁",
+                about_title: "“从伦敦东南部到地中海之心：以语言与故事连结多元文化。”",
+                about_p1: "我在伦敦东南部的烟火气中长大，而生活的轨迹最终引领我来到这座令我深深着迷的地中海之城。在经历过<strong>东亚与拉丁美洲</strong>的丰富生活后，我于二十六岁来到巴塞罗那，从此这里成为了我的家。",
+                about_p2: "我毕业于<strong>巴塞罗那庞培法布拉大学（UPF）</strong>，主修<strong>中文普通话与西班牙语翻译</strong>。目前，我将城市文化导览与<strong>中文普通话、英语、西班牙语和加泰罗尼亚语</strong>的翻译及语言咨询服务相结合。这段独特的跨文化旅程，让我能够以细腻、严谨且充满温度的视角，向世界各地的朋友讲述巴塞罗那的古今故事。",
+                card_sustainable_title: "🌿 倡导可持续旅游",
+                card_sustainable_desc: "我坚信在欧洲践行有深度、尊重社区的可持续旅行，走进那些未被过度喧嚣打扰的隐秘角落。",
+                card_residents_title: "🏘️ 连结游客与常住居民",
+                card_residents_desc: "无论是初访巴塞罗那的旅人，还是在此生活的居民，都能通过深度漫步重新发现这座城市的文化魅力。",
+                quote_text: "“我的心愿是让来自不同视角的旅人与在地居民，共同体会并珍视这座城市的历史厚度与文化光彩。”",
+                quote_author: "— Descobreix Barcelona 文化宣言",
+                chapter_services: "第二章 · 体验与服务",
+                services_title: "为您量身定制的文化探索体验",
+                services_subtitle: "私人专属定制、步调从容舒适，完全契合您的个人兴趣、行程计划或团队需求。",
+                pricing_note: "💡 <em>提示：所示价格为参考标准，可根据您的具体人数、行程定制与时间安排灵活调整。</em>",
+                serv1_title: "城市徒步：经典地标与隐秘角落",
+                serv1_price: "160 € 起 / 路线",
+                serv1_desc: "步行穿梭于两千年的时光隧道：古罗马巴西诺遗迹、哥特区幽静回廊、高迪现代主义建筑群以及远离喧嚣的私藏秘境。",
+                serv1_f1: "哥特区、波恩区与高迪现代主义经典",
+                serv1_f2: "提供中文普通话、英语、西班牙语与加泰语导览",
+                serv1_f3: "历史考据、民间传奇与趣味故事完美结合",
+                serv2_title: "私人定制：巴塞罗那与加泰罗尼亚",
+                serv2_price: "320 € 起 / 天",
+                serv2_desc: "走出市区，专属定制加泰罗尼亚深度一日游：蒙特塞拉特锯齿圣峰、中世纪赫罗纳古城、达利艺术三角及布拉瓦海岸静谧海湾。",
+                serv2_f1: "蒙特塞拉特、赫罗纳、菲格拉斯与布拉瓦海岸",
+                serv2_f2: "100% 按需定制，节奏自由舒适",
+                serv2_f3: "涵盖行程规划、交通安排与门票预订",
+                serv3_title: "居民深度文化路线与语言翻译咨询",
+                serv3_price: "25 € 起 / 人",
+                serv3_desc: "专为本地常住居民设计的街区专题探索，以及中文普通话、英语、西班牙语与加泰语的专业笔译口译与跨文化咨询。",
+                serv3_f1: "老城区历史行会、建筑演变等专题漫步",
+                serv3_f2: "多元文化社群交流与多语言沙龙活动",
+                serv3_f3: "专业笔译/口译与跨文化项目咨询",
+                btn_reserve_serv: "申请预约",
+                chapter_policies: "第三章 · 承诺与政策",
+                policy_title: "预约与取消政策",
+                policy_sub: "清晰、透明的条款，让您从容安排每一次文化探索之旅。",
+                pol1_h: "如何预约",
+                pol1_p: "通过网页表单、微信 (WeChat)、Line 或 WhatsApp 直接联络。确定行程、日期与语言后，您将收到包含集合点在内的正式确认函。",
+                pol2_h: "48 小时提前通知",
+                pol2_p: "旅行计划难免变动。在行程前至少 <strong>48 小时提出改期或取消</strong>，均可免费调整或全额退还预付款。",
+                pol3_h: "逾期取消说明",
+                pol3_p: "48 小时以内取消将收取 50% 费用，用于补偿向导专属档期锁定及前置行程筹备成本。",
+                chapter_contact: "第四章 · 直接联系",
+                contact_title: "与我一起探索巴塞罗那",
+                contact_sub: "欢迎填写表单咨询漫步路线、定制专属一日游、居民活动或翻译合作。我将在 24 小时内与您联系。",
+                form_name: "您的姓名 *",
+                form_email: "电子邮箱 *",
+                form_service: "意向体验或服务",
+                opt_serv1: "城市徒步：经典地标与隐秘角落",
+                opt_serv2: "私人定制：巴塞罗那与加泰罗尼亚",
+                opt_serv3: "本地居民专属文化探索路线",
+                opt_serv4: "语言服务与专业翻译（中/英/西/加泰）",
+                form_pref_lang: "期望的导览 / 服务语言",
+                form_msg: "留言、预估日期与同行人数 *",
+                form_submit: "提交咨询",
+                info_email_lbl: "电子邮箱",
+                info_tel_lbl: "电话 / WhatsApp",
+                info_chat_lbl: "微信 与 Line",
+                info_lang_lbl: "支持工作语言",
+                info_loc_lbl: "常驻地点",
+                footer_rights: "© 2026 Descobreix Barcelona 城市导览与文化服务。以有温度的跨文化视界展现加泰罗尼亚魅力。",
+                panot_hint: "点击巴塞罗那花砖（Panot），点亮文化礼花！",
+                legal_respect: "坚持可持续导览理念，尊重在地社区与历史建筑。",
+                legal_notice_link: "法律声明与隐私政策",
+                cookie_manage: "Cookie 设置",
+                access_manage: "无障碍选项",
+                access_title: "无障碍偏好设置",
+                access_text_size: "字体大小",
+                access_contrast: "高对比度模式",
+                access_dyslexia: "易读字体",
+                access_motion: "减弱动效",
+                cookie_modal_title: "Cookie 与隐私偏好",
+                cookie_modal_desc: "我们仅使用必要 Cookie 记录您的语言设置并保障浏览安全，详情见法律声明。",
+                cookie_essential_title: "核心必要项",
+                cookie_essential_desc: "保障基础安全与语言记忆。",
+                cookie_always_active: "始终启用",
+                cookie_interactivity_title: "文化交互项",
+                cookie_interactivity_desc: "记忆花砖动效设置。",
+                cookie_save_btn: "保存偏好",
+                cookie_banner_title: "Cookie 提示与隐私保护",
+                cookie_banner_desc: "我们使用 Cookie 记录您的语言选择并分析网站流量，保障符合欧洲 GDPR 规范。",
+                cookie_custom_btn: "自定义",
+                cookie_read_more: "阅读详情 / 法律声明",
+                cookie_accept_btn: "全部接受",
+                modal_sent_title: "咨询已成功送达！",
+                modal_sent_desc: "感谢您联系 Descobreix Barcelona。我将尽快审阅您的需求并在 24 小时内给予答复。",
+                modal_sent_btn: "好的"
+            },
+            "zh-hant": {
+                tagline: "城市漫步與深度文化服務",
+                nav_home: "首頁",
+                nav_about: "我的故事",
+                nav_services: "體驗與服務",
+                nav_policies: "預約與取消政策",
+                nav_contact: "聯絡我們",
+                hero_badge: "徒步漫遊 · 私人客製路線 · 深度文化服務",
+                hero_title: "以全新視角 <span>發現巴塞隆納</span>",
+                hero_subtitle: "兩千餘年的歷史積澱，讓巴塞隆納的街巷、廣場與建築蘊藏著無數秘密。邀您與我同行，跳出走馬觀花的常規路線，以親切、多語種與跨文化的視角，觸摸這座城市真正的靈魂。",
+                pillar_1: "從倫敦到巴塞隆納",
+                pillar_2: "龐培法布拉大學翻譯專業畢業",
+                pillar_3: "倡導永續與深度在地體驗",
+                pillar_4: "中文普通話 · 英語 · 西班牙語 · 加泰隆尼亞語",
+                hero_cta: "預約專屬客製導覽",
+                chapter_about: "第一章 · 我的故事",
+                about_badge: "UPF 畢業 · 跨文化橋樑",
+                about_title: "「從倫敦東南部到地中海之心：以語言與故事連結多元文化。」",
+                about_p1: "我在倫敦東南部的煙火氣中長大，而生活的軌跡最終引領我來到這座令我深深著迷的地中海之城。在經歷過<strong>東亞與拉丁美洲</strong>的豐富生活後，我於二十六歲來到巴塞隆納，從此這裡成為了我的家。",
+                about_p2: "我畢業於<strong>巴塞隆納龐培法布拉大學（UPF）</strong>，主修<strong>中文普通話與西班牙語翻譯</strong>。目前，我將城市文化導覽與<strong>中文普通話、英語、西班牙語及加泰隆尼亞語</strong>的翻譯及語言諮詢服務相結合。這段獨特的跨文化旅程，讓我能夠以細膩、嚴謹且充滿溫度的視角，向世界各地的朋友講述巴塞隆納的古今故事。",
+                card_sustainable_title: "🌿 倡導永續旅遊",
+                card_sustainable_desc: "我堅信在歐洲踐行有深度、尊重社區的永續旅行，走進那些未被過度喧囂打擾的隱秘角落。",
+                card_residents_title: "🏘️ 連結遊客與常住居民",
+                card_residents_desc: "無論是初訪巴塞隆納的旅人，還是在此生活的居民，都能透過深度漫步重新發現這座城市的文化魅力。",
+                quote_text: "「我的心願是讓來自不同視角的旅人與在地居民，共同體會並珍視這座城市的歷史厚度與文化光彩。」",
+                quote_author: "— Descobreix Barcelona 文化宣言",
+                chapter_services: "第二章 · 體驗與服務",
+                services_title: "為您量身打造的文化探索體驗",
+                services_subtitle: "私人專屬客製、步調從容舒適，完全契合您的個人興趣、行程計劃或團隊需求。",
+                pricing_note: "💡 <em>提示：所示價格為參考標準，可根據您的具體人數、行程客製與時間安排靈活調整。</em>",
+                serv1_title: "城市徒步：經典地標與隱秘角落",
+                serv1_price: "160 € 起 / 路線",
+                serv1_desc: "步行穿梭於兩千年的時光隧道：古羅馬巴西諾遺跡、哥德區幽靜迴廊、高迪現代主義建築群以及遠離喧囂的私藏秘境。",
+                serv1_f1: "哥德區、波恩區與高迪現代主義經典",
+                serv1_f2: "提供中文普通話、英語、西班牙語與加泰語導覽",
+                serv1_f3: "歷史考據、民間傳奇與趣味故事完美結合",
+                serv2_title: "私人客製：巴塞隆納與加泰隆尼亞",
+                serv2_price: "320 € 起 / 天",
+                serv2_desc: "走出市區，專屬客製加泰隆尼亞深度一日遊：蒙特塞拉特鋸齒聖峰、中世紀赫羅納古城、達利藝術三角及布拉瓦海岸靜謐海灣。",
+                serv2_f1: "蒙特塞拉特、赫羅納、菲格拉斯與布拉瓦海岸",
+                serv2_f2: "100% 按需客製，節奏自由舒適",
+                serv2_f3: "涵蓋行程規劃、交通安排與門票預訂",
+                serv3_title: "居民深度文化路線與語言翻譯諮詢",
+                serv3_price: "25 € 起 / 人",
+                serv3_desc: "專為在地常住居民設計的街區專題探索，以及中文普通話、英語、西班牙語與加泰語的專業筆譯口譯與跨文化諮詢。",
+                serv3_f1: "老城區歷史行會、建築演變等專題漫步",
+                serv3_f2: "多元文化社群交流與多語言沙龍活動",
+                serv3_f3: "專業筆譯/口譯與跨文化專案諮詢",
+                btn_reserve_serv: "申請預約",
+                chapter_policies: "第三章 · 承諾與政策",
+                policy_title: "預約與取消政策",
+                policy_sub: "清晰、透明的條款，讓您從容安排每一次文化探索之旅。",
+                pol1_h: "如何預約",
+                pol1_p: "透過網頁表單、Line、微信 (WeChat) 或 WhatsApp 直接聯絡。確定行程、日期與語言後，您將收到包含集合點在內的正式確認函。",
+                pol2_h: "48 小時提前通知",
+                pol2_p: "旅行計劃難免變動。在行程前至少 <strong>48 小時提出改期或取消</strong>，均可免費調整或全額退還預付款。",
+                pol3_h: "逾期取消說明",
+                pol3_p: "48 小時以內取消將收取 50% 費用，用於補償向導專屬檔期鎖定及前置行程籌備成本。",
+                chapter_contact: "第四章 · 直接聯絡",
+                contact_title: "與我一起探索巴塞隆納",
+                contact_sub: "歡迎填寫表單諮詢漫步路線、客製專屬一日遊、居民活動或翻譯合作。我將在 24 小時內與您聯繫。",
+                form_name: "您的姓名 *",
+                form_email: "電子郵箱 *",
+                form_service: "意向體驗或服務",
+                opt_serv1: "城市徒步：經典地標與隱秘角落",
+                opt_serv2: "私人客製：巴塞隆納與加泰隆尼亞",
+                opt_serv3: "在地居民專屬文化探索路線",
+                opt_serv4: "語言服務與專業翻譯（中/英/西/加泰）",
+                form_pref_lang: "期望的導覽 / 服務語言",
+                form_msg: "留言、預估日期與同行人數 *",
+                form_submit: "提交諮詢",
+                info_email_lbl: "電子郵箱",
+                info_tel_lbl: "電話 / WhatsApp",
+                info_chat_lbl: "Line 與 微信",
+                info_lang_lbl: "支援工作語言",
+                info_loc_lbl: "常駐地點",
+                footer_rights: "© 2026 Descobreix Barcelona 城市導覽與文化服務。以有溫度的跨文化視界展現加泰隆尼亞魅力。",
+                panot_hint: "點擊巴塞隆納花磚（Panot），點亮文化禮花！",
+                legal_respect: "堅持永續導覽理念，尊重在地社區與歷史建築。",
+                legal_notice_link: "法律聲明與隱私政策",
+                cookie_manage: "Cookie 設定",
+                access_manage: "無障礙選項",
+                access_title: "無障礙偏好設定",
+                access_text_size: "字體大小",
+                access_contrast: "高對比度模式",
+                access_dyslexia: "易讀字體",
+                access_motion: "減弱動效",
+                cookie_modal_title: "Cookie 與隱私偏好",
+                cookie_modal_desc: "我們僅使用必要 Cookie 記錄您的語言設定並保障瀏覽安全，詳見法律聲明。",
+                cookie_essential_title: "核心必要項",
+                cookie_essential_desc: "保障基礎安全與語言記憶。",
+                cookie_always_active: "始終啟用",
+                cookie_interactivity_title: "文化交互項",
+                cookie_interactivity_desc: "記憶花磚動效設定。",
+                cookie_save_btn: "保存偏好",
+                cookie_banner_title: "Cookie 提示與隱私保護",
+                cookie_banner_desc: "我們使用 Cookie 記錄您的語言選擇並分析網站流量，保障符合歐洲 GDPR 規範。",
+                cookie_custom_btn: "自定義",
+                cookie_read_more: "閱讀詳情 / 法律聲明",
+                cookie_accept_btn: "全部接受",
+                modal_sent_title: "諮詢已成功送達！",
+                modal_sent_desc: "感謝您聯絡 Descobreix Barcelona。我將盡快審閱您的需求並在 24 小時內給予答覆。",
+                modal_sent_btn: "好的"
+            }
+        };
+
+        // CAMBIADOR DE IDIOMA
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                const isTarget = btn.getAttribute('onclick').includes(`'${lang}'`);
+                btn.classList.toggle('active', isTarget);
+            });
+
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18nData[lang] && i18nData[lang][key]) {
+                    el.innerHTML = i18nData[lang][key];
+                }
+            });
+
+            let htmlLang = 'es';
+            if (lang === 'ca') htmlLang = 'ca';
+            if (lang === 'en') htmlLang = 'en';
+            if (lang === 'zh-hans') htmlLang = 'zh-CN';
+            if (lang === 'zh-hant') htmlLang = 'zh-TW';
+            
+            document.documentElement.lang = htmlLang;
+            document.body.setAttribute('lang', htmlLang);
+        }
+
+        // CONTROL DE MODALES
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.toggle('active');
+        }
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-backdrop')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // ACCESIBILIDAD
+        function setFontScale(scale, btn) {
+            document.documentElement.style.setProperty('--font-scale', scale);
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.toggle-chip').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function toggleHighContrast() {
+            const isContrast = document.body.classList.toggle('high-contrast');
+            const btn = document.getElementById('contrastToggle');
+            btn.innerText = isContrast ? "On" : "Off";
+            btn.classList.toggle('active', isContrast);
+        }
+
+        function toggleDyslexiaFont() {
+            const isDyslexia = document.body.classList.toggle('dyslexia-font');
+            const btn = document.getElementById('dyslexiaToggle');
+            btn.innerText = isDyslexia ? "On" : "Off";
+            btn.classList.toggle('active', isDyslexia);
+        }
+
+        function toggleReducedMotion() {
+            const isReduced = document.body.classList.toggle('reduced-motion');
+            const btn = document.getElementById('motionToggle');
+            btn.innerText = isReduced ? "On" : "Off";
+            btn.classList.toggle('active', isReduced);
+        }
+
+        // COOKIES
+        function acceptAllCookies() {
+            document.getElementById('cookieBanner').classList.add('hidden');
+        }
+
+        function saveCookieCustomization() {
+            toggleModal('cookieModal');
+            document.getElementById('cookieBanner').classList.add('hidden');
+        }
+
+        // ENVÍO DE FORMULARIO
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('leadForm').reset();
+            toggleModal('feedbackModal');
+        }
+
+        // HUEVO DE PASCUA DEL PANOT
+        const panotBtn = document.getElementById('panotEasterEgg');
+        const culturalArtifacts = ['🦎', '🐉', '🌹', '📖', '💎', '🏰', '🗺️', '☀️', '🌸', '✨'];
+
+        panotBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('reduced-motion')) return;
+
+            for (let i = 0; i < 40; i++) {
+                setTimeout(createArtifact, i * 65);
+            }
+
+            panotBtn.style.transform = 'rotate(360deg) scale(1.3)';
+            setTimeout(() => {
+                panotBtn.style.transform = '';
+            }, 600);
+        });
+
+        function createArtifact() {
+            const el = document.createElement('div');
+            el.classList.add('falling-artifact');
+            el.innerText = culturalArtifacts[Math.floor(Math.random() * culturalArtifacts.length)];
+            el.style.left = (Math.random() * 92 + 2) + 'vw';
+            
+            const duration = Math.random() * 2.8 + 3.2;
+            el.style.animationDuration = duration + 's';
+            el.style.fontSize = (Math.random() * 1.3 + 1.2) + 'rem';
+
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), duration * 1000);
+        }
+    </script>
+</body>
+</html>
