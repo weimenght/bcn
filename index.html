@@ -1356,32 +1356,40 @@
             <!-- Formulario de Contacto -->
             <div class="contact-form-card">
                 <form action="https://formspree.io/f/xrpgkeea" method="POST">
-    
+
                     <div class="form-group">
                         <label for="nameInput" data-i18n="form_name">Nombre Completo *</label>
-                        <input type="text" name="name" id="nameInput" class="form-control" required>
+                        <input type="text" name="name" id="nameInput" class="form-control" placeholder="Ej. Alexia Puig / David Chen" required>
                     </div>
     
                     <div class="form-group">
                         <label for="emailInput" data-i18n="form_email">Correo Electrónico *</label>
-                        <input type="email" name="email" id="emailInput" class="form-control" required>
+                        <input type="email" name="email" id="emailInput" class="form-control" placeholder="tuemail@dominio.com" required>
                     </div>
     
                     <div class="form-group">
                         <label for="serviceSelect" data-i18n="form_service">Experiencia o Servicio Deseado</label>
                         <select name="service" id="serviceSelect" class="form-control">
-                            </select>
+                            <option value="walking_tour" data-i18n="opt_serv1">Walking Tour: Clásicos & Secretos de Barcelona</option>
+                            <option value="ruta_privada" data-i18n="opt_serv2">Ruta Privada Personalizada (BCN & Catalunya)</option>
+                            <option value="ruta_residentes" data-i18n="opt_serv3">Rutas Culturales para Residentes</option>
+                            <option value="servicios_linguisticos" data-i18n="opt_serv4">Servicios Lingüísticos y Traducción</option>
+                        </select>
                     </div>
     
                     <div class="form-group">
-                        <label for="langSelect" data-i18n="form_pref_lang">Idioma Preferido</label>
+                        <label for="langSelect" data-i18n="form_pref_lang">Idioma Preferido para la Visita / Servicio</label>
                         <select name="language" id="langSelect" class="form-control">
-                            </select>
+                            <option value="castellano">Español (Castellano)</option>
+                            <option value="chinese">中文 (Chino Mandarín)</option>
+                            <option value="english">English (Inglés)</option>
+                            <option value="catala">Català (Catalán)</option>
+                        </select>
                     </div>
     
                     <div class="form-group">
-                        <label for="messageInput" data-i18n="form_msg">Mensaje *</label>
-                        <textarea name="message" id="messageInput" class="form-control" required></textarea>
+                        <label for="messageInput" data-i18n="form_msg">Mensaje, Fechas y Número de Personas *</label>
+                        <textarea name="message" id="messageInput" class="form-control" placeholder="Indica fechas estimadas, número de asistentes, intereses particulares o detalles del proyecto..." required></textarea>
                     </div>
     
                     <button type="submit" class="btn-catalan" style="width: 100%; justify-content: center;">
