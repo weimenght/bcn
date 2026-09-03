@@ -127,8 +127,16 @@
         }
 
         .brand-crest {
-            font-size: 1.8rem;
-            filter: drop-shadow(0 2px 4px rgba(217,155,38,0.4));
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            cursor: pointer;
+            filter: drop-shadow(0 2px 6px rgba(17, 50, 77, 0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .brand-crest:hover {
+            transform: scale(1.08);
         }
 
         .brand-title {
@@ -1143,9 +1151,25 @@
 
     <!-- Navegación Principal -->
     <nav>
-        <!-- Simple Logo-->
+        <!-- Simple Logo
         <a href="#" class="nav-brand">
             <span class="brand-crest">🦎</span>
+            <div>
+                <span class="brand-title">Longdrac Tours</span>
+                <span class="brand-tagline" data-i18n="tagline">Tours & Experiencias Culturales</span>
+            </div>
+        </a>
+        -->
+
+        <!--png logo-->
+        <a href="#" class="nav-brand">
+            <img 
+                id="dracLogo" 
+                class="brand-crest" 
+                src="assets/images/longdrac_logo_icon.png" 
+                alt="Longdrac Tours Logo"
+                title="¿El Drac tiene vida?"
+            >
             <div>
                 <span class="brand-title">Longdrac Tours</span>
                 <span class="brand-tagline" data-i18n="tagline">Tours & Experiencias Culturales</span>
