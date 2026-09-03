@@ -106,6 +106,21 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
+        /* Animation applied when clicking the dragon */
+        .drac-walk {
+            display: inline-block;
+            animation: walkDrac 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes walkDrac {
+            0% { transform: translateX(0) scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+            20% { transform: translateX(30px) scale(1.2) rotate(15deg); filter: hue-rotate(90deg); }
+            40% { transform: translateX(60px) scale(1.2) rotate(-10deg); filter: hue-rotate(180deg); }
+            60% { transform: translateX(30px) scale(1.2) rotate(180deg); filter: hue-rotate(270deg); }
+            80% { transform: translateX(0px) scale(1.2) rotate(360deg); filter: hue-rotate(360deg); }
+            100% { transform: translateX(0) scale(1) rotate(360deg); filter: hue-rotate(0deg); }
+        }
+
         /* Barra de Navegación */
         nav {
             display: flex;
@@ -150,6 +165,10 @@
             color: var(--med-cobalt);
             letter-spacing: 1.5px;
             display: block;
+        }
+
+        .brand-title .brand-accent {
+            color: var(--sang-crimson); /* Crimson Red for "DRAC" */
         }
 
         .brand-tagline {
@@ -1173,13 +1192,10 @@
                 src="assets/images/longdrac_logo_icon.png" 
                 alt="Longdrac Tours Logo"
                 title="¿El Drac tiene vida?"
+                style="cursor: pointer;"
             >
             <div>
-                <span class="brand-title">
-                    <text fill="#11324D">
-                    LONG<tspan fill="#8A2222">DRAC</tspan> TOUR
-                </text>
-                </span>
+                <span class="brand-title">LONG<span class="brand-accent">DRAC</span> TOURS</span>
                 <span class="brand-tagline" data-i18n="tagline">Tours & Experiencias Culturales</span>
             </div>
         </a>
@@ -1872,6 +1888,21 @@
 
     <!-- SCRIPTS: Internacionalización, Modales, Accesibilidad y Animación -->
     <script>
+
+        // Click trigger for the animated dragon logo
+        const dracLogo = document.getElementById('dracLogo');
+        if (dracLogo) {
+            dracLogo.addEventListener('click', () => {
+                if (document.body.classList.contains('reduced-motion')) return;
+                if (dracLogo.classList.contains('drac-walk')) return;
+        
+                dracLogo.classList.add('drac-walk');
+                setTimeout(() => {
+                    dracLogo.classList.remove('drac-walk');
+                }, 3000);
+            });
+        }
+ 
         // DICCIONARIOS MULTILINGÜES ACTUALIZADOS (Chino Mandarín, Inglés, Español, Catalán en todas las opciones)
         const i18nData = {
             es: {
