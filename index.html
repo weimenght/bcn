@@ -1534,7 +1534,49 @@
         <!-- Botón del Panot -->
         <div class="panot-trigger-wrap">
             <button class="panot-btn" id="panotEasterEgg" title="¡Haz clic para una lluvia cultural de celebración!" aria-label="Lluvia cultural de Barcelona">
-                🌸
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" role="img" aria-label="Longdrac Tours - Panot de Flor">
+                  <defs>
+                    <style>
+                      .panot-bg { fill: #FAF6EF; stroke: #D99B26; stroke-width: 4; stroke-linejoin: round; }
+                      .panot-inner-line { fill: none; stroke: #D99B26; stroke-width: 1.5; opacity: 0.5; }
+                      .panot-carve { stroke: #D99B26; stroke-width: 1; opacity: 0.35; stroke-linecap: round; }
+                      .panot-petal { fill: #11324D; }
+                      .panot-accent { fill: #8A2222; }
+                      .panot-core { fill: #D99B26; }
+                      .panot-highlight { fill: #FAF6EF; }
+                    </style>
+    
+                    <filter id="panotShadow" x="-10%" y="-10%" width="120%" height="120%">
+                      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#11324D" flood-opacity="0.12" />
+                    </filter>
+                  </defs>
+
+                  <g filter="url(#panotShadow)">
+                    <polygon class="panot-bg" points="100,10 190,100 100,190 10,100" />
+    
+                    <polygon class="panot-inner-line" points="100,24 176,100 100,176 24,100" />
+
+                    <line class="panot-carve" x1="45" y1="45" x2="155" y2="155" />
+                    <line class="panot-carve" x1="155" y1="45" x2="45" y2="155" />
+                    <line class="panot-carve" x1="100" y1="20" x2="100" y2="180" />
+                    <line class="panot-carve" x1="20" y1="100" x2="180" y2="100" />
+
+                    <polygon class="panot-accent" points="100,14 106,24 100,34 94,24" />
+                    <polygon class="panot-accent" points="186,100 176,106 166,100 176,94" />
+                    <polygon class="panot-accent" points="100,186 106,176 100,166 94,176" />
+                    <polygon class="panot-accent" points="14,100 24,106 34,100 24,94" />
+
+                    <g class="panot-petal">
+                      <path d="M 100,82 C 70,60 82,32 100,28 C 118,32 130,60 100,82 Z" />
+                      <path d="M 100,118 C 130,140 118,168 100,172 C 82,168 70,140 100,118 Z" />
+                      <path d="M 82,100 C 60,130 32,118 28,100 C 32,82 60,70 82,100 Z" />
+                      <path d="M 118,100 C 140,70 168,82 172,100 C 168,118 140,130 118,100 Z" />
+                    </g>
+
+                    <circle class="panot-core" cx="100" cy="100" r="10" />
+                    <circle class="panot-highlight" cx="100" cy="100" r="3.5" />
+                  </g>
+                </svg>
             </button>
         </div>
         <p class="panot-hint" data-i18n="panot_hint">¡Pulsa la flor del Panot de Barcelona para celebrar!</p>
