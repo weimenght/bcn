@@ -79,9 +79,15 @@
             padding: 0;
         }
 
+        html {
+            /* Sets the root rem value dynamically so ALL rem units scale across the entire site */
+            font-size: calc(16px * var(--font-scale));
+            transition: font-size 0.2s ease;
+        }
+
         body {
             font-family: var(--font-serif);
-            font-size: calc(18px * var(--font-scale));
+            font-size: 1.125rem; /* 18px equivalent that scales proportionally */
             background-color: var(--limestone-bg);
             color: var(--forged-iron);
             overflow-x: hidden;
@@ -308,7 +314,7 @@
 
         .hero h1 {
             font-family: var(--font-display);
-            font-size: clamp(2.3rem, 5.5vw, 4.6rem);
+            font-size: calc(clamp(2.2rem, 5vw, 4.4rem) * var(--font-scale));
             line-height: 1.18;
             margin-bottom: 22px;
             max-width: 980px;
@@ -1902,6 +1908,30 @@
                 }, 3000);
             });
         }
+
+        // Rotating Barcelona Cursors on Click
+        const bcnCursors = [
+            // 1. Classic Gold Panot Tile
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='4' fill='%23D99B26'/><circle cx='16' cy='10' r='3.5' fill='%23FAF6EF'/><circle cx='16' cy='22' r='3.5' fill='%23FAF6EF'/><circle cx='10' cy='16' r='3.5' fill='%23FAF6EF'/><circle cx='22' cy='16' r='3.5' fill='%23FAF6EF'/><circle cx='16' cy='16' r='2' fill='%23D99B26'/></svg>\") 16 16, auto",
+    
+            // 2. Crimson Dragon / Lizard
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M8,24 C6,18 12,14 16,16 C20,18 22,12 26,10 C28,12 26,16 22,18 C18,20 18,26 12,26 Z' fill='%238A2222'/><circle cx='25' cy='11' r='1.5' fill='%23FAF6EF'/><polygon points='16,14 18,11 20,15' fill='%23D99B26'/></svg>\") 16 16, auto",
+    
+            // 3. Multicolored Trencadís Mosaic Shard
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><polygon points='16,4 28,14 20,28 6,22' fill='%2311324D' stroke='%23FAF6EF' stroke-width='1.5'/><polygon points='16,4 20,16 6,22' fill='%23D99B26'/><polygon points='20,16 28,14 20,28' fill='%238A2222'/></svg>\") 16 16, auto",
+
+            // 4. Sant Jordi Red Rose
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='14' r='9' fill='%238A2222'/><path d='M16,22 C16,28 14,30 12,30' stroke='%2336533D' stroke-width='2' fill='none'/><circle cx='16' cy='14' r='5' fill='%23D99B26' opacity='0.7'/></svg>\") 16 16, auto"
+        ];
+
+        let currentCursorIndex = 0;
+
+        document.addEventListener('click', () => {
+            if (document.body.classList.contains('reduced-motion')) return;
+    
+            currentCursorIndex = (currentCursorIndex + 1) % bcnCursors.length;
+            document.body.style.cursor = bcnCursors[currentCursorIndex];
+        });
  
         // DICCIONARIOS MULTILINGÜES ACTUALIZADOS (Chino Mandarín, Inglés, Español, Catalán en todas las opciones)
         const i18nData = {
@@ -2491,6 +2521,10 @@
             const btn = document.getElementById('motionToggle');
             btn.innerText = isReduced ? "On" : "Off";
             btn.classList.toggle('active', isReduced);
+
+            if (isReduced) {
+                document.body.style.cursor = 'auto';
+            }
         }
 
         // COOKIES
