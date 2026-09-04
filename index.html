@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+    
+<!-- Easter Egg 4: L'Hora del Vermut Banner -->
+<div id="vermutBanner" class="vermut-banner">
+    <span>🍸</span>
+    <span><strong>És l'hora del vermut!</strong> (12h - 14h) — Bon profit i salut!</span>
+    <span>🍊🫒</span>
+</div>
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1171,6 +1179,235 @@
                 padding: 18px;
             }
         }
+
+        /* ============================================================
+           EASTER EGGS SUITE STYLING
+        ============================================================ */
+        
+        /* --- 1. Pa amb Tomàquet Modal --- */
+        .pat-container {
+            background: #FAF6EF;
+            border: 2px solid #D99B26;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            max-width: 380px;
+            margin: 0 auto;
+            box-shadow: 0 15px 35px rgba(17, 50, 77, 0.2);
+        }
+        .pat-bread {
+            width: 220px;
+            height: 90px;
+            background: #E8CA9B;
+            border: 5px solid #8C531B;
+            border-radius: 45px 45px 25px 25px;
+            margin: 15px auto;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: inset 0 0 10px rgba(140, 83, 27, 0.3);
+        }
+        .pat-bread.garlic-rubbed {
+            box-shadow: inset 0 0 15px #FFF9D2;
+        }
+        .pat-bread.tomato-rubbed {
+            background: #D94A38 !important;
+        }
+        .pat-bread.oil-drizzled {
+            box-shadow: inset 0 0 20px #FFD700, 0 0 12px rgba(217, 155, 38, 0.5);
+        }
+        .pat-ingredients {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .pat-btn {
+            background: #FFF;
+            border: 1px solid #D99B26;
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .pat-btn:hover {
+            transform: scale(1.15);
+            background: #F1E8D9;
+        }
+        .pat-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* --- 2. Casa Milà Sentinel Eye-Tracking --- */
+        .sentinel-widget {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 65px;
+            height: 85px;
+            z-index: 850;
+            cursor: pointer;
+            filter: drop-shadow(0 6px 12px rgba(17, 50, 77, 0.25));
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .sentinel-widget:hover {
+            transform: scale(1.12) rotate(-3deg);
+        }
+        
+        /* --- 3. Correfoc Sparklers --- */
+        .spark-particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 10000;
+            animation: fadeSpark 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes fadeSpark {
+            0% { transform: scale(1) translate(0, 0); opacity: 1; }
+            100% { transform: scale(0.1) translate(var(--dx), var(--dy)); opacity: 0; }
+        }
+        
+        /* --- 4. L'Hora del Vermut Banner --- */
+        .vermut-banner {
+            background: linear-gradient(135deg, #8A2222 0%, #11324D 100%);
+            color: #FAF6EF;
+            padding: 8px 18px;
+            font-family: var(--font-sans, sans-serif);
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-bottom: 2px solid #D99B26;
+            animation: slideVermut 0.6s ease forwards;
+        }
+        @keyframes slideVermut {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        /* --- 5. Sardana Ring --- */
+        .sardana-wrapper {
+            width: 140px;
+            height: 140px;
+            margin: 20px auto;
+            position: relative;
+            border: 1px dashed rgba(217, 155, 38, 0.5);
+            border-radius: 50%;
+        }
+        .sardana-ring {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: sardanaStep 7s infinite linear;
+        }
+        @keyframes sardanaStep {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(45deg); }
+            30% { transform: rotate(35deg); }
+            75% { transform: rotate(-45deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .sardana-dancer {
+            position: absolute;
+            font-size: 1.3rem;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            margin: -12px;
+        }
+        
+        /* --- 6. Metro Ticket (T-Casual) Flip Card --- */
+        .ticket-scene {
+            width: 240px;
+            height: 130px;
+            perspective: 800px;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+        .ticket-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .ticket-card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .ticket-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            padding: 12px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+        }
+        .ticket-front {
+            background: #F4E8D1;
+            border: 2px solid #B37D14;
+            color: #11324D;
+        }
+        .ticket-back {
+            background: #11324D;
+            color: #FAF6EF;
+            border: 2px solid #D99B26;
+            transform: rotateY(180deg);
+            font-size: 0.78rem;
+            line-height: 1.4;
+        }
+        .ticket-magstripe {
+            height: 16px;
+            background: #2B2A27;
+            border-radius: 2px;
+            margin-top: 4px;
+        }
+        .ticket-stamp {
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: #8A2222;
+            font-weight: bold;
+        }
+        
+        /* --- 7. Roman Barcino Dust Stone --- */
+        .barcino-stone {
+            position: relative;
+            background: #3B3835;
+            border: 3px solid #6E6862;
+            border-radius: 12px;
+            padding: 22px 25px;
+            color: #FAF6EF;
+            text-align: center;
+            max-width: 500px;
+            margin: 30px auto;
+            overflow: hidden;
+            user-select: none;
+        }
+        .barcino-latin {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.05rem;
+            letter-spacing: 2px;
+            color: #D99B26;
+            margin-bottom: 8px;
+        }
+        .barcino-dust-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }       
     </style>
 </head>
 <body lang="es">
@@ -1384,6 +1621,16 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Easter Egg 7: Roman Barcino Stone Inscription -->
+        <div class="barcino-stone" id="barcinoStone">
+            <canvas id="dustCanvas" class="barcino-dust-canvas"></canvas>
+            <div class="barcino-latin">COLONIA IULIA AUGUSTA FAVENTIA PATERNA BARCINO</div>
+            <p style="font-size: 0.8rem; margin: 0; color: #E0DACB;">
+                <em>"Fundada fa més de 2.000 anys sota les pedres del Barri Gòtic."</em>
+            </p>
+        </div>
+        
     </section>
 
     <!-- Cita de Manifiesto y Filosofía -->
@@ -1655,6 +1902,7 @@
                 </svg>
             </button>
         </div>
+        
         <p class="panot-hint" data-i18n="panot_hint">¡Pulsa la flor del Panot de Barcelona para celebrar!</p>
 
         <div class="footer-legal">
@@ -1667,6 +1915,65 @@
                 <a href="javascript:void(0)" onclick="toggleModal('accessModal')" data-i18n="access_manage">Accesibilidad</a>
             </div>
         </div>
+
+        <!-- Easter Egg 6: Vintage Metro Ticket (T-Casual) -->
+        <div class="ticket-scene" onclick="flipTicket(this)">
+            <div class="ticket-card" id="metroTicket">
+                <div class="ticket-face ticket-front">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:700; font-size:0.85rem;">T-CASUAL</span>
+                        <span style="font-size:1.1rem;">🚇</span>
+                    </div>
+                    <div class="ticket-magstripe"></div>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                        <span style="font-size:0.65rem; color:#6E6862;">1 ZONA · ATM</span>
+                        <span class="ticket-stamp" id="ticketStamp">TOCAR PER VALIDAR</span>
+                    </div>
+                </div>
+                <div class="ticket-face ticket-back">
+                    <strong style="color:var(--senyera-gold);">CONSELL LOCAL DE BCN:</strong>
+                    <p id="localTipText" style="margin: 4px 0;"></p>
+                    <span style="font-size:0.65rem; opacity:0.7;">Clica per girar el bitllet ↺</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Easter Egg 1: Pa amb Tomàquet Trigger & Modal Window -->
+        <div style="margin: 15px 0;">
+            <button onclick="toggleModal('patModal')" style="background:transparent; border:1px dashed var(--senyera-gold); border-radius:20px; padding:6px 14px; font-family:var(--font-sans); font-size:0.75rem; color:var(--senyera-gold); cursor:pointer;">
+                🥖 Preparar Pa amb Tomàquet
+            </button>
+        </div>
+        
+        <div class="modal-backdrop" id="patModal" role="dialog" aria-modal="true">
+            <div class="modal-box pat-container">
+                <button class="modal-close" onclick="toggleModal('patModal')">&times;</button>
+                <h4 style="font-family:var(--font-display); color:var(--med-cobalt); margin-bottom:5px;">L'Art del Pa amb Tomàquet</h4>
+                <p id="patInstruction" style="font-size:0.82rem; color:var(--iron-muted);">Pas 1: Toca l'all per fregar el pa torrat.</p>
+                
+                <div class="pat-bread" id="patBread"></div>
+                
+                <div class="pat-ingredients">
+                    <button class="pat-btn" id="btnGarlic" title="All" onclick="rubGarlic()">🧄</button>
+                    <button class="pat-btn" id="btnTomato" title="Tomàquet de Penjar" onclick="rubTomato()" disabled>🍅</button>
+                    <button class="pat-btn" id="btnOil" title="Oli d'Oliva & Sal" onclick="drizzleOil()" disabled>🫒</button>
+                </div>
+                <div id="patSuccessMsg" style="display:none; font-weight:700; color:var(--sang-crimson); margin-top:12px; font-size:0.85rem;">
+                    🎉 Felicitats! Ja pots viure a Catalunya!
+                </div>
+            </div>
+        </div>
+        
+        <!-- Easter Egg 2: Casa Milà Chimney Sentinel Widget -->
+        <svg class="sentinel-widget" id="pedreraSentinel" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg" title="Sentinella de La Pedrera (Casa Milà)">
+            <!-- Helmet Stone Body -->
+            <path d="M 30,125 C 20,95 20,45 25,25 C 30,5 70,5 75,25 C 80,45 80,95 70,125 Z" fill="#D7CEC2" stroke="#8C8275" stroke-width="3"/>
+            <!-- Visor Eye-Slit Base -->
+            <ellipse cx="50" cy="42" rx="20" ry="9" fill="#1C1E1D"/>
+            <!-- Dynamic Gaze Pupils -->
+            <circle id="sentinelPupilLeft" cx="44" cy="42" r="3.5" fill="#FAF6EF"/>
+            <circle id="sentinelPupilRight" cx="56" cy="42" r="3.5" fill="#FAF6EF"/>
+        </svg>
     </footer>
 
     <!-- MODAL DE ACCESIBILIDAD -->
@@ -1901,6 +2208,182 @@
 
     <!-- SCRIPTS: Internacionalización, Modales, Accesibilidad y Animación -->
     <script>
+        
+        /* ============================================================
+           EASTER EGGS SUITE SCRIPTING
+        ============================================================ */
+        
+        // --- 1. Pa amb Tomàquet Logic ---
+        let patStep = 1;
+        function rubGarlic() {
+            document.getElementById('patBread').classList.add('garlic-rubbed');
+            document.getElementById('btnGarlic').disabled = true;
+            document.getElementById('btnTomato').disabled = false;
+            document.getElementById('patInstruction').innerText = "Pas 2: Restrega bé el tomàquet de penjar!";
+        }
+        function rubTomato() {
+            document.getElementById('patBread').classList.add('tomato-rubbed');
+            document.getElementById('btnTomato').disabled = true;
+            document.getElementById('btnOil').disabled = false;
+            document.getElementById('patInstruction').innerText = "Pas 3: Un bon raig d'oli d'oliva verge extra i sal!";
+        }
+        function drizzleOil() {
+            document.getElementById('patBread').classList.add('oil-drizzled');
+            document.getElementById('btnOil').disabled = true;
+            document.getElementById('patInstruction').style.display = 'none';
+            document.getElementById('patSuccessMsg').style.display = 'block';
+        }
+        
+        // --- 2. Casa Milà Sentinel Eye Tracker ---
+        const pupilL = document.getElementById('sentinelPupilLeft');
+        const pupilR = document.getElementById('sentinelPupilRight');
+        const sentinel = document.getElementById('pedreraSentinel');
+        
+        window.addEventListener('mousemove', (e) => {
+            if (!sentinel) return;
+            const rect = sentinel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+        
+            const dx = e.clientX - centerX;
+            const dy = e.clientY - centerY;
+            const angle = Math.atan2(dy, dx);
+            const dist = Math.min(4, Math.hypot(dx, dy) / 40);
+        
+            const ox = Math.cos(angle) * dist;
+            const oy = Math.sin(angle) * dist;
+        
+            pupilL.setAttribute('cx', 44 + ox);
+            pupilL.setAttribute('cy', 42 + oy);
+            pupilR.setAttribute('cx', 56 + ox);
+            pupilR.setAttribute('cy', 42 + oy);
+        });
+        
+        // --- 3. Correfoc Sparklers ---
+        let correfocActive = false;
+        const correfocBtn = document.getElementById('correfocBtn');
+        
+        if (correfocBtn) {
+            correfocBtn.addEventListener('click', () => {
+                correfocActive = true;
+                correfocBtn.innerText = "💥 VISCA EL CORREFOC!";
+                setTimeout(() => {
+                    correfocActive = false;
+                    correfocBtn.innerHTML = "🔥 <em>Festa del Foc</em>";
+                }, 4000);
+            });
+        }
+        
+        window.addEventListener('mousemove', (e) => {
+            if (!correfocActive || document.body.classList.contains('reduced-motion')) return;
+        
+            for (let i = 0; i < 3; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark-particle';
+                spark.style.left = `${e.clientX}px`;
+                spark.style.top = `${e.clientY}px`;
+                spark.style.width = `${Math.random() * 6 + 4}px`;
+                spark.style.height = spark.style.width;
+                spark.style.background = Math.random() > 0.4 ? '#D99B26' : '#8A2222';
+                spark.style.setProperty('--dx', `${(Math.random() - 0.5) * 80}px`);
+                spark.style.setProperty('--dy', `${Math.random() * 80 + 20}px`);
+        
+                document.body.appendChild(spark);
+                setTimeout(() => spark.remove(), 750);
+            }
+        });
+        
+        // --- 4. L'Hora del Vermut Real-Time Clock ---
+        function checkVermutTime() {
+            const hours = new Date().getHours();
+            const banner = document.getElementById('vermutBanner');
+            // Active between 12:00 and 14:00 (12 PM - 2 PM)
+            if (banner && hours >= 12 && hours < 14) {
+                banner.style.display = 'flex';
+            }
+        }
+        checkVermutTime();
+        
+        // --- 5. La Sardana Dancers Ring ---
+        const sardanaRing = document.getElementById('sardanaRing');
+        if (sardanaRing) {
+            const dancers = ['💃', '🕺', '💃', '🕺', '💃', '🕺'];
+            const radius = 55;
+            dancers.forEach((dancer, i) => {
+                const angle = (i / dancers.length) * (2 * Math.PI);
+                const x = 70 + radius * Math.cos(angle);
+                const y = 70 + radius * Math.sin(angle);
+                const el = document.createElement('div');
+                el.className = 'sardana-dancer';
+                el.style.left = `${x}px`;
+                el.style.top = `${y}px`;
+                el.innerText = dancer;
+                sardanaRing.appendChild(el);
+            });
+        }
+        
+        // --- 6. Metro Ticket (T-Casual) Flip & Tips ---
+        const bcnTips = [
+            "Ves al claustre de la Catedral i compta les 13 oques blanques d'honor a Santa Eulàlia.",
+            "Gaudeix de la posta de sol amb vistes panoràmiques 360° des dels Búnquers del Carmel.",
+            "Darrere la Plaça del Rei, trobaràs les columnes romanes de 2.000 anys del Temple d'August.",
+            "Fes una pausa a la Plaça de Sant Felip Neri, el racó més silenciós i històric del Gòtic.",
+            "Al Carrer del Bisbe, busca la calavera esculpida amb una daga sota el pont neogòtic."
+        ];
+        
+        function flipTicket(scene) {
+            const card = scene.querySelector('.ticket-card');
+            card.classList.toggle('is-flipped');
+            
+            // Stamp the ticket with current date and time
+            const now = new Date();
+            const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            const dateStr = `${now.getDate()}/${now.getMonth() + 1}`;
+            document.getElementById('ticketStamp').innerText = `VAL ${dateStr} ${timeStr}`;
+            
+            // Set a random secret tip
+            const randomTip = bcnTips[Math.floor(Math.random() * bcnTips.length)];
+            document.getElementById('localTipText').innerText = randomTip;
+        }
+        
+        // --- 7. Roman Barcino Dust Scratch Canvas ---
+        const dustCanvas = document.getElementById('dustCanvas');
+        if (dustCanvas) {
+            const ctx = dustCanvas.getContext('2d');
+            
+            function initDustCanvas() {
+                dustCanvas.width = dustCanvas.offsetWidth;
+                dustCanvas.height = dustCanvas.offsetHeight;
+                
+                // Fill with ancient stone dust
+                ctx.fillStyle = '#80776B';
+                ctx.fillRect(0, 0, dustCanvas.width, dustCanvas.height);
+                
+                // Hint text
+                ctx.font = '12px Montserrat, sans-serif';
+                ctx.fillStyle = '#E8E1D7';
+                ctx.textAlign = 'center';
+                ctx.fillText("Fregui per treure la pols dels segles...", dustCanvas.width / 2, dustCanvas.height / 2 + 4);
+            }
+            
+            window.addEventListener('load', initDustCanvas);
+            
+            function wipeDust(e) {
+                const rect = dustCanvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 22, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            dustCanvas.addEventListener('mousemove', wipeDust);
+            dustCanvas.addEventListener('touchmove', (e) => {
+                if (e.touches[0]) wipeDust(e.touches[0]);
+            });
+        }
 
         // Click trigger for the animated dragon logo
         const dracLogo = document.getElementById('dracLogo');
