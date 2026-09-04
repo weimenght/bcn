@@ -842,7 +842,7 @@
             font-weight: 600;
             word-break: break-word;
         }
-
+        
         /* FOOTER & HUEVO DE PASCUA CULTURAL */
         footer {
             background: var(--forged-iron);
@@ -1268,7 +1268,67 @@
             color: #8A2222;
             font-weight: bold;
         } 
-                             
+        
+        /* --- DYNAMIC CULTURAL DISCOVERY SLOT --- */
+        .bcn-discovery-slot {
+            margin: 18px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 48px; /* Prevents footer jump while loading */
+        }
+        
+        /* Base style for whichever egg is loaded */
+        .discovery-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(217, 155, 38, 0.35);
+            border-radius: 25px;
+            color: var(--limestone-warm, #FAF6EF);
+            font-family: var(--font-sans, sans-serif);
+            font-size: 0.8rem;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .discovery-badge:hover {
+            background: rgba(217, 155, 38, 0.12);
+            border-color: var(--senyera-gold, #D99B26);
+            transform: translateY(-1.5px);
+        }
+        
+        /* Specific detail styling */
+        .egg-hint {
+            font-size: 0.72rem;
+            color: var(--senyera-gold, #D99B26);
+            margin-left: 4px;
+            opacity: 0.85;
+        }
+        
+        /* Mini message popup under the badge */
+        .discovery-feedback {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.76rem;
+            color: var(--limestone-warm, #FAF6EF);
+            background: rgba(17, 50, 77, 0.75);
+            border: 1px solid var(--senyera-gold, #D99B26);
+            padding: 6px 14px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 420px;
+            animation: fadeInEgg 0.3s ease forwards;
+        }
+        
+        @keyframes fadeInEgg {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }                                   
     </style>
 </head>
 <body lang="es">
@@ -1694,7 +1754,7 @@
         </div>
     </section>
 
-    <!-- FOOTER: Huevo de Pascua Cultural y Enlaces Legales -->
+    <!-- FOOTER: Huevo de Pascua Cultural y Enlaces Legales (OLD FOOTER)
     <footer>
         <p data-i18n="footer_rights">&copy; 2026 Longdrac Tours. Acercando el patrimonio de Catalunya con mirada cercana y multicultural.</p>
         
@@ -1767,28 +1827,15 @@
                 <a href="javascript:void(0)" onclick="toggleModal('accessModal')" data-i18n="access_manage">Accesibilidad</a>
             </div>
         </div>
+    </footer>
+    -->
 
-        <!-- Easter Egg 6: Vintage Metro Ticket (T-Casual) -->
-        <div class="ticket-scene" onclick="flipTicket(this)">
-            <div class="ticket-card" id="metroTicket">
-                <div class="ticket-face ticket-front">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-weight:700; font-size:0.85rem;">T-CASUAL</span>
-                        <span style="font-size:1.1rem;">🚇</span>
-                    </div>
-                    <div class="ticket-magstripe"></div>
-                    <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-                        <span style="font-size:0.65rem; color:#6E6862;">1 ZONA · ATM</span>
-                        <span class="ticket-stamp" id="ticketStamp">TOCAR PER VALIDAR</span>
-                    </div>
-                </div>
-                <div class="ticket-face ticket-back">
-                    <strong style="color:var(--senyera-gold);">CONSELL LOCAL DE BCN:</strong>
-                    <p id="localTipText" style="margin: 4px 0;"></p>
-                    <span style="font-size:0.65rem; opacity:0.7;">Clica per girar el bitllet ↺</span>
-                </div>
-            </div>
-        </div>
+    <!--NEW FOOTER-->
+    <footer>
+        <p data-i18n="footer_rights">&copy; 2026 Longdrac Tours. Acercando el patrimonio de Catalunya con mirada cercana y multicultural.</p>
+        
+        <!-- DYNAMIC CULTURAL DISCOVERY SLOT (Only 1 appears per visit) -->
+        <div id="bcnDiscoverySlot" class="bcn-discovery-slot"></div>
     </footer>
 
     <!-- MODAL DE ACCESIBILIDAD -->
@@ -2023,6 +2070,113 @@
 
     <!-- SCRIPTS: Internacionalización, Modales, Accesibilidad y Animación -->
     <script>
+        
+        // ============================================================
+        // RANDOMIZED BARCELONA EASTER EGG (1 of 3 per visit)
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const slot = document.getElementById('bcnDiscoverySlot');
+            if (!slot) return;
+        
+            const easterEggs = [
+                // --- 1. PA AMB TOMÀQUET ---
+                {
+                    render: () => `
+                        <div style="display:flex; flex-direction:column; align-items:center;">
+                            <div class="discovery-badge" id="eggPat" title="Fes clic per preparar-lo">
+                                <span>🥖</span>
+                                <strong style="color:var(--senyera-gold);">Pa amb Tomàquet</strong>
+                                <span class="egg-hint">(Toca per sucar!)</span>
+                            </div>
+                            <div class="discovery-feedback" id="eggPatMsg">
+                                🍅 <em>Restregat amb tomàquet de penjar, oli d'oliva verge extra i sal marina. Bon profit!</em>
+                            </div>
+                        </div>
+                    `,
+                    init: () => {
+                        const btn = document.getElementById('eggPat');
+                        const msg = document.getElementById('eggPatMsg');
+                        let rubbed = false;
+                        btn.addEventListener('click', () => {
+                            rubbed = !rubbed;
+                            btn.style.borderColor = rubbed ? '#8A2222' : 'rgba(217,155,38,0.35)';
+                            btn.querySelector('span').innerText = rubbed ? '🍅🥖' : '🥖';
+                            msg.style.display = rubbed ? 'block' : 'none';
+                        });
+                    }
+                },
+        
+                // --- 2. T-CASUAL METRO TICKET ---
+                {
+                    render: () => `
+                        <div style="display:flex; flex-direction:column; align-items:center;">
+                            <div class="discovery-badge" id="eggTicket" title="Fes clic per validar el bitllet">
+                                <span style="display:inline-block; width:12px; height:6px; background:#222; border-radius:1px;"></span>
+                                <strong style="color:#FAF6EF;">T-CASUAL</strong>
+                                <span class="egg-hint" id="ticketStamp">· TOCAR PER VALIDAR</span>
+                            </div>
+                            <div class="discovery-feedback" id="eggTicketMsg"></div>
+                        </div>
+                    `,
+                    init: () => {
+                        const tips = [
+                            "🚇 Secret local: Al claustre de la Catedral hi viuen 13 oques blanques en memòria de Santa Eulàlia.",
+                            "🚇 Secret local: Puja als Búnquers del Carmel per tenir les millors vistes panoràmiques 360° de la ciutat.",
+                            "🚇 Secret local: Darrere la Plaça del Rei s'amaguen 4 columnes intactes del Temple Romà d'August.",
+                            "🚇 Secret local: Al Carrer del Bisbe, busca la petita calavera esculpida sota el pont neogòtic."
+                        ];
+                        const btn = document.getElementById('eggTicket');
+                        const stamp = document.getElementById('ticketStamp');
+                        const msg = document.getElementById('eggTicketMsg');
+        
+                        btn.addEventListener('click', () => {
+                            const now = new Date();
+                            const hh = String(now.getHours()).padStart(2, '0');
+                            const mm = String(now.getMinutes()).padStart(2, '0');
+                            stamp.innerText = `· VALIDAT ${hh}:${mm}`;
+                            stamp.style.color = '#8A2222';
+                            btn.style.borderColor = '#8A2222';
+                            
+                            msg.style.display = 'block';
+                            msg.innerText = tips[Math.floor(Math.random() * tips.length)];
+                        });
+                    }
+                },
+        
+                // --- 3. ROMAN BARCINO INSCRIPTION ---
+                {
+                    render: () => `
+                        <div style="display:flex; flex-direction:column; align-items:center;">
+                            <div class="discovery-badge" id="eggBarcino" title="Pedra romana del Barri Gòtic">
+                                <span style="font-size:0.9rem;">🏛️</span>
+                                <span style="font-family:'Cinzel Decorative', Georgia, serif; letter-spacing:1.5px; font-size:0.75rem;">
+                                    COLONIA · BARCINO
+                                </span>
+                                <span class="egg-hint">(c. 15 a.C.)</span>
+                            </div>
+                            <div class="discovery-feedback" id="eggBarcinoMsg">
+                                🏛️ <em>Colonia Iulia Augusta Faventia Paterna Barcino: les arrels romanes de 2.000 anys sota els nostres peus.</em>
+                            </div>
+                        </div>
+                    `,
+                    init: () => {
+                        const btn = document.getElementById('eggBarcino');
+                        const msg = document.getElementById('eggBarcinoMsg');
+                        let open = false;
+                        btn.addEventListener('click', () => {
+                            open = !open;
+                            btn.style.borderColor = open ? '#D99B26' : 'rgba(217,155,38,0.35)';
+                            msg.style.display = open ? 'block' : 'none';
+                        });
+                    }
+                }
+            ];
+        
+            // Pick 1 randomly from the array of 3
+            const chosenEgg = easterEggs[Math.floor(Math.random() * easterEggs.length)];
+            slot.innerHTML = chosenEgg.render();
+            chosenEgg.init();
+        });
                 
         /* ============================================================
            EASTER EGGS SUITE SCRIPTING
