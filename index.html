@@ -1600,62 +1600,58 @@
     <footer>
         <p data-i18n="footer_rights">&copy; 2026 Longdrac Tours. Acercando el patrimonio de Catalunya con mirada cercana y multicultural.</p>
 
-        <button class="panot-btn" id="panotEasterEgg" title="¡Haz clic para una lluvia cultural de celebración!" aria-label="Flor del Panot - Ruta del Modernisme">
-            <svg viewBox="0 0 120 120" class="panot-svg" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <radialGradient id="terracottaBase" cx="38%" cy="32%" r="72%">
-                        <stop offset="0%" stop-color="#C55353"/>
-                        <stop offset="45%" stop-color="#A53838"/>
-                        <stop offset="85%" stop-color="#842424"/>
-                        <stop offset="100%" stop-color="#681818"/>
-                    </radialGradient>
-        
-                    <linearGradient id="grooveLimestone" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#FFFDF9"/>
-                        <stop offset="50%" stop-color="#EFE2D1"/>
-                        <stop offset="100%" stop-color="#D7C1A7"/>
-                    </linearGradient>
-        
-                    <filter id="carveDepth" x="-10%" y="-10%" width="125%" height="125%">
-                        <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#360808" flood-opacity="0.45"/>
-                    </filter>
-                </defs>
-
-                <circle cx="60" cy="60" r="54" fill="url(#terracottaBase)" stroke="#521212" stroke-width="1.2"/>
-        
-                <circle cx="60" cy="60" r="50" fill="none" stroke="url(#grooveLimestone)" stroke-width="0.75" stroke-opacity="0.4"/>
-                <circle cx="60" cy="60" r="47.5" fill="none" stroke="#4A0E0E" stroke-width="0.5" stroke-opacity="0.6"/>
-        
-                <circle cx="60" cy="11.5" r="1" fill="url(#grooveLimestone)" opacity="0.6"/>
-                <circle cx="108.5" cy="60" r="1" fill="url(#grooveLimestone)" opacity="0.6"/>
-                <circle cx="60" cy="108.5" r="1" fill="url(#grooveLimestone)" opacity="0.6"/>
-                <circle cx="11.5" cy="60" r="1" fill="url(#grooveLimestone)" opacity="0.6"/>
-
-                <g filter="url(#carveDepth)">
-                    <g fill="none" stroke="#480F0F" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="60" cy="60" r="14"/>
-                        <path d="M 45.5,51.5 A 17,17 0 1,1 74.5,51.5"/>
-                        <path d="M 68.5,45.5 A 17,17 0 1,1 68.5,74.5"/>
-                        <path d="M 74.5,68.5 A 17,17 0 1,1 45.5,68.5"/>
-                        <path d="M 51.5,74.5 A 17,17 0 1,1 51.5,45.5"/>
-                        <path d="M 74.5,51.5 A 6,6 0 0,1 68.5,45.5"/>
-                        <path d="M 68.5,74.5 A 6,6 0 0,1 74.5,68.5"/>
-                        <path d="M 45.5,68.5 A 6,6 0 0,1 51.5,74.5"/>
-                        <path d="M 51.5,45.5 A 6,6 0 0,1 45.5,51.5"/>
+            <button class="panot-btn" id="panotEasterEgg" title="¡Haz clic para una lluvia cultural de celebración!" aria-label="Flor del Panot de Barcelona">
+                <svg viewBox="0 0 120 120" class="panot-svg" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="tileLimestone" cx="35%" cy="30%" r="75%">
+                            <stop offset="0%" stop-color="#FCFAF5" />
+                            <stop offset="60%" stop-color="#F4ECE1" />
+                            <stop offset="100%" stop-color="#E7DCcb" />
+                        </radialGradient>
+            
+                        <linearGradient id="panotGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#F3D084" />
+                            <stop offset="45%" stop-color="#D49B30" />
+                            <stop offset="100%" stop-color="#9E6913" />
+                        </linearGradient>
+            
+                        <filter id="tileShadow" x="-10%" y="-10%" width="125%" height="125%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#11324D" flood-opacity="0.14" />
+                        </filter>
+                    </defs>
+            
+                    <rect x="6" y="6" width="108" height="108" rx="10" fill="url(#tileLimestone)" stroke="#D49B30" stroke-width="1.2" />
+            
+                    <rect x="14" y="14" width="92" height="92" rx="6" fill="none" stroke="url(#panotGold)" stroke-width="2.6" />
+                    <rect x="19" y="19" width="82" height="82" rx="3" fill="none" stroke="#C5932C" stroke-width="0.75" stroke-opacity="0.45" />
+            
+                    <g filter="url(#tileShadow)">
+                        <g fill="url(#panotGold)">
+                            <circle cx="60" cy="60" r="16.5" />
+                            <circle cx="43.5" cy="43.5" r="16.5" />
+                            <circle cx="76.5" cy="43.5" r="16.5" />
+                            <circle cx="43.5" cy="76.5" r="16.5" />
+                            <circle cx="76.5" cy="76.5" r="16.5" />
+                        </g>
+            
+                        <g fill="none" stroke="#8C5C0F" stroke-width="0.8" stroke-opacity="0.75">
+                            <circle cx="60" cy="60" r="16.5" />
+                            <circle cx="43.5" cy="43.5" r="16.5" />
+                            <circle cx="76.5" cy="43.5" r="16.5" />
+                            <circle cx="43.5" cy="76.5" r="16.5" />
+                            <circle cx="76.5" cy="76.5" r="16.5" />
+                        </g>
+            
+                        <g fill="url(#tileLimestone)" stroke="url(#panotGold)" stroke-width="1.2">
+                            <circle cx="60" cy="60" r="10.5" />
+                            <circle cx="43.5" cy="43.5" r="10.5" />
+                            <circle cx="76.5" cy="43.5" r="10.5" />
+                            <circle cx="43.5" cy="76.5" r="10.5" />
+                            <circle cx="76.5" cy="76.5" r="10.5" />
+                        </g>
+            
+                        <circle cx="60" cy="60" r="2.5" fill="#11324D" fill-opacity="0.7" />
                     </g>
-
-                    <g fill="none" stroke="url(#grooveLimestone)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="60" cy="60" r="14"/>
-                        <path d="M 45.5,51.5 A 17,17 0 1,1 74.5,51.5"/>
-                        <path d="M 68.5,45.5 A 17,17 0 1,1 68.5,74.5"/>
-                        <path d="M 74.5,68.5 A 17,17 0 1,1 45.5,68.5"/>
-                        <path d="M 51.5,74.5 A 17,17 0 1,1 51.5,45.5"/>
-                        <path d="M 74.5,51.5 A 6,6 0 0,1 68.5,45.5"/>
-                        <path d="M 68.5,74.5 A 6,6 0 0,1 74.5,68.5"/>
-                        <path d="M 45.5,68.5 A 6,6 0 0,1 51.5,74.5"/>
-                        <path d="M 51.5,45.5 A 6,6 0 0,1 45.5,51.5"/>
-                    </g>
-                  </g>
                 </svg>
             </button>
         </div>
