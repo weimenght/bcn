@@ -1211,124 +1211,78 @@
             from { transform: translateY(-100%); }
             to { transform: translateY(0); }
         }
-            
-        /* --- 6. Metro Ticket (T-Casual) Flip Card --- */
-        .ticket-scene {
-            width: 240px;
-            height: 130px;
-            perspective: 800px;
-            margin: 20px auto;
-            cursor: pointer;
-        }
-        .ticket-card {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .ticket-card.is-flipped {
-            transform: rotateY(180deg);
-        }
-        .ticket-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 10px;
-            padding: 12px;
-            box-sizing: border-box;
+
+        /* ============================================================
+           RANDOMIZED BARCELONA EASTER EGG SLOT
+        ============================================================ */
+        .bcn-egg-wrapper {
+            margin: 24px auto 14px auto;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-        }
-        .ticket-front {
-            background: #F4E8D1;
-            border: 2px solid #B37D14;
-            color: #11324D;
-        }
-        .ticket-back {
-            background: #11324D;
-            color: #FAF6EF;
-            border: 2px solid #D99B26;
-            transform: rotateY(180deg);
-            font-size: 0.78rem;
-            line-height: 1.4;
-        }
-        .ticket-magstripe {
-            height: 16px;
-            background: #2B2A27;
-            border-radius: 2px;
-            margin-top: 4px;
-        }
-        .ticket-stamp {
-            font-family: monospace;
-            font-size: 0.7rem;
-            color: #8A2222;
-            font-weight: bold;
-        } 
-        
-        /* --- DYNAMIC CULTURAL DISCOVERY SLOT --- */
-        .bcn-discovery-slot {
-            margin: 18px auto;
-            display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 48px; /* Prevents footer jump while loading */
+            justify-content: center;
+            min-height: 110px; /* Reserves space so layout never jumps */
         }
         
-        /* Base style for whichever egg is loaded */
-        .discovery-badge {
+        .bcn-egg-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 18px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(217, 155, 38, 0.35);
-            border-radius: 25px;
-            color: var(--limestone-warm, #FAF6EF);
-            font-family: var(--font-sans, sans-serif);
-            font-size: 0.8rem;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.25s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            justify-content: center;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
-        .discovery-badge:hover {
-            background: rgba(217, 155, 38, 0.12);
-            border-color: var(--senyera-gold, #D99B26);
-            transform: translateY(-1.5px);
+        .bcn-egg-btn:hover {
+            transform: scale(1.08) translateY(-2px);
         }
         
-        /* Specific detail styling */
-        .egg-hint {
-            font-size: 0.72rem;
-            color: var(--senyera-gold, #D99B26);
-            margin-left: 4px;
-            opacity: 0.85;
-        }
-        
-        /* Mini message popup under the badge */
-        .discovery-feedback {
-            display: none;
+        .bcn-egg-hint {
             margin-top: 10px;
-            font-size: 0.76rem;
-            color: var(--limestone-warm, #FAF6EF);
-            background: rgba(17, 50, 77, 0.75);
-            border: 1px solid var(--senyera-gold, #D99B26);
-            padding: 6px 14px;
-            border-radius: 12px;
-            text-align: center;
-            max-width: 420px;
-            animation: fadeInEgg 0.3s ease forwards;
+            font-family: var(--font-sans, sans-serif);
+            font-size: 0.78rem;
+            color: var(--senyera-gold, #D99B26);
+            opacity: 0.85;
+            letter-spacing: 0.5px;
         }
         
-        @keyframes fadeInEgg {
-            from { opacity: 0; transform: translateY(4px); }
+        /* Subtle result banner appearing beneath the egg when clicked */
+        .bcn-egg-result {
+            display: none;
+            max-width: 420px;
+            margin: 12px auto 0 auto;
+            padding: 10px 16px;
+            background: #11324D;
+            border: 1px solid #D99B26;
+            border-radius: 8px;
+            color: #FAF6EF;
+            font-size: 0.8rem;
+            line-height: 1.45;
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            animation: eggFadeIn 0.3s ease forwards;
+        }
+        
+        @keyframes eggFadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
             to { opacity: 1; transform: translateY(0); }
-        }                                   
+        }
+        
+        /* Celebration Confetti */
+        .celebration-shard {
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            animation: fallShard 2.8s linear forwards;
+        }
+        
+        @keyframes fallShard {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+        }
+                                  
     </style>
 </head>
 <body lang="es">
@@ -1834,10 +1788,13 @@
     <footer>
         <p data-i18n="footer_rights">&copy; 2026 Longdrac Tours. Acercando el patrimonio de Catalunya con mirada cercana y multicultural.</p>
         
-        <!-- DYNAMIC CULTURAL DISCOVERY SLOT (Only 1 appears per visit) -->
-        <div id="bcnDiscoverySlot" class="bcn-discovery-slot"></div>
+        <!-- DYNAMIC BARCELONA EASTER EGG SLOT (Randomly renders 1 on each load) -->
+        <div class="bcn-egg-wrapper">
+            <div id="bcnEasterEggSlot"></div>
+            <div id="bcnEggResult" class="bcn-egg-result"></div>
+        </div>
     </footer>
-
+    
     <!-- MODAL DE ACCESIBILIDAD -->
     <div class="modal-backdrop" id="accessModal" role="dialog" aria-modal="true">
         <div class="modal-box">
@@ -2071,111 +2028,162 @@
     <!-- SCRIPTS: Internacionalización, Modales, Accesibilidad y Animación -->
     <script>
         
-        // ============================================================
-        // RANDOMIZED BARCELONA EASTER EGG (1 of 3 per visit)
-        // ============================================================
+        /* ============================================================
+           RANDOMIZED BARCELONA EASTER EGG ENGINE
+        ============================================================ */
         document.addEventListener('DOMContentLoaded', () => {
-            const slot = document.getElementById('bcnDiscoverySlot');
+            const slot = document.getElementById('bcnEasterEggSlot');
+            const resultBox = document.getElementById('bcnEggResult');
             if (!slot) return;
         
-            const easterEggs = [
-                // --- 1. PA AMB TOMÀQUET ---
-                {
-                    render: () => `
-                        <div style="display:flex; flex-direction:column; align-items:center;">
-                            <div class="discovery-badge" id="eggPat" title="Fes clic per preparar-lo">
-                                <span>🥖</span>
-                                <strong style="color:var(--senyera-gold);">Pa amb Tomàquet</strong>
-                                <span class="egg-hint">(Toca per sucar!)</span>
-                            </div>
-                            <div class="discovery-feedback" id="eggPatMsg">
-                                🍅 <em>Restregat amb tomàquet de penjar, oli d'oliva verge extra i sal marina. Bon profit!</em>
-                            </div>
-                        </div>
-                    `,
-                    init: () => {
-                        const btn = document.getElementById('eggPat');
-                        const msg = document.getElementById('eggPatMsg');
-                        let rubbed = false;
-                        btn.addEventListener('click', () => {
-                            rubbed = !rubbed;
-                            btn.style.borderColor = rubbed ? '#8A2222' : 'rgba(217,155,38,0.35)';
-                            btn.querySelector('span').innerText = rubbed ? '🍅🥖' : '🥖';
-                            msg.style.display = rubbed ? 'block' : 'none';
-                        });
+            // Pick a random Easter egg (0: Panot, 1: Pa amb Tomàquet, 2: T-Casual, 3: Barcino)
+            const eggChoice = Math.floor(Math.random() * 4);
+        
+            if (eggChoice === 0) {
+                /* ----------------------------------------------------
+                   EGG 1: PANOT DE BARCELONA (Cultural Celebration)
+                ---------------------------------------------------- */
+                slot.innerHTML = `
+                    <button class="bcn-egg-btn" id="panotBtn" title="¡Haz clic para una lluvia cultural!" aria-label="Flor del Panot">
+                        <svg viewBox="0 0 120 120" width="76" height="76">
+                            <defs>
+                                <radialGradient id="eggTerracotta" cx="38%" cy="32%" r="72%">
+                                    <stop offset="0%" stop-color="#C55353"/><stop offset="60%" stop-color="#842424"/><stop offset="100%" stop-color="#551212"/>
+                                </radialGradient>
+                                <linearGradient id="eggGroove" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#FFFDF9"/><stop offset="100%" stop-color="#D7C1A7"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="60" cy="60" r="54" fill="url(#eggTerracotta)" stroke="#551212" stroke-width="1.2"/>
+                            <circle cx="60" cy="60" r="49" fill="none" stroke="url(#eggGroove)" stroke-width="0.8" opacity="0.5"/>
+                            <g fill="none" stroke="url(#eggGroove)" stroke-width="2.2" stroke-linecap="round">
+                                <circle cx="60" cy="60" r="14"/>
+                                <path d="M 45.5,51.5 A 17,17 0 1,1 74.5,51.5"/>
+                                <path d="M 68.5,45.5 A 17,17 0 1,1 68.5,74.5"/>
+                                <path d="M 74.5,68.5 A 17,17 0 1,1 45.5,68.5"/>
+                                <path d="M 51.5,74.5 A 17,17 0 1,1 51.5,45.5"/>
+                                <path d="M 74.5,51.5 A 6,6 0 0,1 68.5,45.5 M 68.5,74.5 A 6,6 0 0,1 74.5,68.5 M 45.5,68.5 A 6,6 0 0,1 51.5,74.5 M 51.5,45.5 A 6,6 0 0,1 45.5,51.5"/>
+                            </g>
+                        </svg>
+                    </button>
+                    <div class="bcn-egg-hint">Flor del Panot · Toca per celebrar</div>
+                `;
+        
+                document.getElementById('panotBtn').addEventListener('click', () => {
+                    // Trigger shower of mosaic trencadís and rose petals
+                    const colors = ['#D99B26', '#8A2222', '#11324D', '#1B998B', '#FFFDF9'];
+                    for (let i = 0; i < 40; i++) {
+                        const shard = document.createElement('div');
+                        shard.className = 'celebration-shard';
+                        shard.style.left = `${Math.random() * 100}vw`;
+                        shard.style.top = '-10px';
+                        shard.style.width = `${Math.random() * 8 + 6}px`;
+                        shard.style.height = `${Math.random() * 12 + 6}px`;
+                        shard.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        shard.style.clipPath = Math.random() > 0.5 
+                            ? 'polygon(50% 0%, 100% 100%, 0% 100%)' 
+                            : 'polygon(20% 0%, 100% 30%, 70% 100%, 0% 80%)';
+                        shard.style.animationDuration = `${Math.random() * 1.5 + 1.8}s`;
+                        document.body.appendChild(shard);
+                        setTimeout(() => shard.remove(), 3200);
                     }
-                },
+                });
         
-                // --- 2. T-CASUAL METRO TICKET ---
-                {
-                    render: () => `
-                        <div style="display:flex; flex-direction:column; align-items:center;">
-                            <div class="discovery-badge" id="eggTicket" title="Fes clic per validar el bitllet">
-                                <span style="display:inline-block; width:12px; height:6px; background:#222; border-radius:1px;"></span>
-                                <strong style="color:#FAF6EF;">T-CASUAL</strong>
-                                <span class="egg-hint" id="ticketStamp">· TOCAR PER VALIDAR</span>
-                            </div>
-                            <div class="discovery-feedback" id="eggTicketMsg"></div>
-                        </div>
-                    `,
-                    init: () => {
-                        const tips = [
-                            "🚇 Secret local: Al claustre de la Catedral hi viuen 13 oques blanques en memòria de Santa Eulàlia.",
-                            "🚇 Secret local: Puja als Búnquers del Carmel per tenir les millors vistes panoràmiques 360° de la ciutat.",
-                            "🚇 Secret local: Darrere la Plaça del Rei s'amaguen 4 columnes intactes del Temple Romà d'August.",
-                            "🚇 Secret local: Al Carrer del Bisbe, busca la petita calavera esculpida sota el pont neogòtic."
-                        ];
-                        const btn = document.getElementById('eggTicket');
-                        const stamp = document.getElementById('ticketStamp');
-                        const msg = document.getElementById('eggTicketMsg');
+            } else if (eggChoice === 1) {
+                /* ----------------------------------------------------
+                   EGG 2: PA AMB TOMÀQUET (The Catalan Gastronomic Seal)
+                ---------------------------------------------------- */
+                slot.innerHTML = `
+                    <button class="bcn-egg-btn" id="patBtn" title="El secret del bon Pa amb Tomàquet" aria-label="Pa amb Tomàquet">
+                        <svg viewBox="0 0 100 100" width="76" height="76">
+                            <circle cx="50" cy="50" r="46" fill="#F4EADB" stroke="#D99B26" stroke-width="1.8"/>
+                            <circle cx="50" cy="50" r="41" fill="none" stroke="#D99B26" stroke-width="0.8" stroke-dasharray="2,2"/>
+                            <!-- Rustic Bread Slice -->
+                            <path d="M 28,60 C 28,45 35,34 50,34 C 65,34 72,45 72,60 C 72,66 65,68 50,68 C 35,68 28,66 28,60 Z" fill="#DDB06C" stroke="#8C531B" stroke-width="1.6"/>
+                            <!-- Rubbed Tomato Pulp Center -->
+                            <ellipse cx="50" cy="54" rx="14" ry="7" fill="#C53A2A" opacity="0.9"/>
+                            <!-- Golden Olive Oil Drops -->
+                            <circle cx="45" cy="53" r="2" fill="#FFD700"/>
+                            <circle cx="55" cy="55" r="1.6" fill="#FFD700"/>
+                        </svg>
+                    </button>
+                    <div class="bcn-egg-hint">Pa amb Tomàquet · La fórmula sagrada</div>
+                `;
         
-                        btn.addEventListener('click', () => {
-                            const now = new Date();
-                            const hh = String(now.getHours()).padStart(2, '0');
-                            const mm = String(now.getMinutes()).padStart(2, '0');
-                            stamp.innerText = `· VALIDAT ${hh}:${mm}`;
-                            stamp.style.color = '#8A2222';
-                            btn.style.borderColor = '#8A2222';
-                            
-                            msg.style.display = 'block';
-                            msg.innerText = tips[Math.floor(Math.random() * tips.length)];
-                        });
-                    }
-                },
+                document.getElementById('patBtn').addEventListener('click', () => {
+                    resultBox.style.display = 'block';
+                    resultBox.innerHTML = `
+                        <strong style="color:var(--senyera-gold);">🥖 L'Orde Sagrat del Pa amb Tomàquet:</strong><br>
+                        1. Pa de pagès de crosta cruixent.<br>
+                        2. Fregar tomàquet de penjar de branca.<br>
+                        3. Generós raig d'oli d'oliva verge extra i sal marina.<br>
+                        <em>(Si li poses el tomàquet ja triturat... no diguis que ets a Barcelona!)</em>
+                    `;
+                });
         
-                // --- 3. ROMAN BARCINO INSCRIPTION ---
-                {
-                    render: () => `
-                        <div style="display:flex; flex-direction:column; align-items:center;">
-                            <div class="discovery-badge" id="eggBarcino" title="Pedra romana del Barri Gòtic">
-                                <span style="font-size:0.9rem;">🏛️</span>
-                                <span style="font-family:'Cinzel Decorative', Georgia, serif; letter-spacing:1.5px; font-size:0.75rem;">
-                                    COLONIA · BARCINO
-                                </span>
-                                <span class="egg-hint">(c. 15 a.C.)</span>
-                            </div>
-                            <div class="discovery-feedback" id="eggBarcinoMsg">
-                                🏛️ <em>Colonia Iulia Augusta Faventia Paterna Barcino: les arrels romanes de 2.000 anys sota els nostres peus.</em>
-                            </div>
-                        </div>
-                    `,
-                    init: () => {
-                        const btn = document.getElementById('eggBarcino');
-                        const msg = document.getElementById('eggBarcinoMsg');
-                        let open = false;
-                        btn.addEventListener('click', () => {
-                            open = !open;
-                            btn.style.borderColor = open ? '#D99B26' : 'rgba(217,155,38,0.35)';
-                            msg.style.display = open ? 'block' : 'none';
-                        });
-                    }
-                }
-            ];
+            } else if (eggChoice === 2) {
+                /* ----------------------------------------------------
+                   EGG 3: T-CASUAL (Metro Ticket & Secret Neighborhood Tip)
+                ---------------------------------------------------- */
+                slot.innerHTML = `
+                    <button class="bcn-egg-btn" id="ticketBtn" title="Toca per validar el bitllet i descobrir un secret" aria-label="T-Casual Metro">
+                        <svg viewBox="0 0 110 70" width="86" height="56">
+                            <rect x="3" y="3" width="104" height="64" rx="6" fill="#F4E8D1" stroke="#B37D14" stroke-width="1.6"/>
+                            <rect x="3" y="16" width="104" height="12" fill="#2B2A27"/>
+                            <text x="10" y="44" font-family="Montserrat, sans-serif" font-weight="800" font-size="9" fill="#11324D">T-CASUAL</text>
+                            <text x="10" y="56" font-family="monospace" font-size="7" fill="#8A2222" id="ticketMiniStamp">1 ZONA · TOCAR</text>
+                            <text x="88" y="56" font-size="12">🚇</text>
+                        </svg>
+                    </button>
+                    <div class="bcn-egg-hint">Bitllet de Metro · Validar per un secret</div>
+                `;
         
-            // Pick 1 randomly from the array of 3
-            const chosenEgg = easterEggs[Math.floor(Math.random() * easterEggs.length)];
-            slot.innerHTML = chosenEgg.render();
-            chosenEgg.init();
+                const bcnSecretTips = [
+                    "🚇 Al claustre de la Catedral hi viuen 13 oques blanques en memòria dels 13 martiris de Santa Eulàlia.",
+                    "🚇 El mirador gratuït amb les millors vistes 360° de la ciutat és als Búnquers del Carmel.",
+                    "🚇 Amagades dins d'un pati gòtic al Carrer Paradís hi trobaràs 4 columnes intactes del Temple Romà d'August.",
+                    "🚇 Al Carrer del Bisbe, busca la misteriosa calavera travessada per una daga esculpida sota el pont neogòtic."
+                ];
+        
+                document.getElementById('ticketBtn').addEventListener('click', () => {
+                    const now = new Date();
+                    const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                    const stamp = document.getElementById('ticketMiniStamp');
+                    if (stamp) stamp.textContent = `VAL ${timeStr}`;
+        
+                    resultBox.style.display = 'block';
+                    resultBox.innerHTML = `
+                        <strong style="color:var(--senyera-gold);">CONSELL DEL GUIA LOCAL:</strong><br>
+                        ${bcnSecretTips[Math.floor(Math.random() * bcnSecretTips.length)]}
+                    `;
+                });
+        
+            } else {
+                /* ----------------------------------------------------
+                   EGG 4: ROMAN BARCINO INSCRIPTION (The Ancient City Stone)
+                ---------------------------------------------------- */
+                slot.innerHTML = `
+                    <button class="bcn-egg-btn" id="barcinoBtn" title="Toca per desxifrar la inscripció romana" aria-label="Inscripció Romana Barcino">
+                        <svg viewBox="0 0 110 70" width="86" height="56">
+                            <rect x="3" y="3" width="104" height="64" rx="5" fill="#3D3935" stroke="#7A7265" stroke-width="1.8"/>
+                            <rect x="7" y="7" width="96" height="56" rx="3" fill="none" stroke="#D99B26" stroke-width="0.6" opacity="0.4"/>
+                            <text x="55" y="32" font-family="'Cinzel Decorative', Georgia, serif" font-weight="700" font-size="8" fill="#D99B26" text-anchor="middle" letter-spacing="1">COLONIA</text>
+                            <text x="55" y="46" font-family="'Cinzel Decorative', Georgia, serif" font-weight="700" font-size="9" fill="#FAF6EF" text-anchor="middle" letter-spacing="1.5">BARCINO</text>
+                        </svg>
+                    </button>
+                    <div class="bcn-egg-hint">Pedra Romana · Desxifrar l'origen</div>
+                `;
+        
+                document.getElementById('barcinoBtn').addEventListener('click', () => {
+                    resultBox.style.display = 'block';
+                    resultBox.innerHTML = `
+                        <strong style="color:var(--senyera-gold);">🏛️ L'Origen de Barcelona (c. 15 a.C.):</strong><br>
+                        El nom oficial romà complet era:<br>
+                        <em>"Colonia Iulia Augusta Faventia Paterna Barcino"</em>.<br>
+                        Encara pots tocar aquestes muralles de fa més de 2.000 anys passejant pel Barri Gòtic!
+                    `;
+                });
+            }
         });
                 
         /* ============================================================
